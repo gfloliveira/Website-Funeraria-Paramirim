@@ -160,12 +160,15 @@
 
         .glow-red {
             background: var(--c-accent);
+            animation: emergencyPulse 2.5s infinite;
         }
         .glow-red::before {
             background: linear-gradient(45deg, var(--c-accent), #D62231, var(--c-accent));
         }
         .glow-red:hover {
-            box-shadow: 0 0 20px rgba(214, 34, 49, 0.6);
+            animation: none;
+            box-shadow: 0 0 25px rgba(214, 34, 49, 0.8), inset 0 0 10px rgba(255,255,255,0.2);
+            transform: translateY(-2px);
         }
 
         .card-inner {
@@ -174,12 +177,47 @@
             backdrop-filter: blur(10px);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
+            position: relative;
         }
         
+        .card-inner::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent);
+            transform: skewX(-25deg);
+            transition: left 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
         .card-inner:hover {
             border-color: rgba(212, 175, 55, 0.3);
             box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 20px rgba(212, 175, 55, 0.05);
             transform: translateY(-5px);
+        }
+
+        .card-inner:hover::after {
+            left: 200%;
+        }
+
+        /* Ghost Button Elegant Fill */
+        .btn-ghost {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-ghost::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(212, 175, 55, 0.1);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+        .btn-ghost:hover::before {
+            transform: scaleY(1);
         }
 
         .noise-overlay {
@@ -228,6 +266,21 @@
             background: rgba(255,255,255,0.05);
         }
 
+        /* Ambient Keyframes */
+        @keyframes emergencyPulse {
+            0% { box-shadow: 0 0 0 0 rgba(163, 22, 33, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(163, 22, 33, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(163, 22, 33, 0); }
+        }
+
+        @keyframes etherealGlow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(212,175,55,0.2)) scale(1); }
+            50% { filter: drop-shadow(0 0 25px rgba(212,175,55,0.6)) scale(1.04); }
+        }
+        .anim-ethereal {
+            animation: etherealGlow 4s ease-in-out infinite;
+        }
+
     /* Solemn Reveal Animation */
         @keyframes solemnReveal {
             0% { opacity: 0; transform: translateY(15px); filter: blur(8px); letter-spacing: 0.05em; }
@@ -249,7 +302,7 @@
     <div class="loader">
         <div class="relative mb-8 flex justify-center items-center">
             <div class="absolute inset-0 bg-gold/20 blur-2xl rounded-full scale-110"></div>
-            <img src="../logo sem fundo.png" alt="Funerária Paramirim" class="h-16 md:h-24 w-auto relative z-10 drop-shadow-[0px_0px_15px_rgba(255,255,255,0.3)] animate-pulse" />
+            <img src="../logo sem fundo.png" alt="Funerária Paramirim" class="h-16 md:h-24 w-auto relative z-10 anim-ethereal" />
         </div>
         <div class="loader-bar-wrap bg-white/5 overflow-hidden rounded-full h-[2px]">
             <div class="loader-bar h-full"></div>
@@ -333,11 +386,11 @@
                 </p>
 
                 <div class="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-6 opacity-0 hero-fade">
-                    <button class="glow-button flex items-center justify-center gap-2">
+                    <button class="glow-button flex items-center justify-center gap-2 group">
                         Ver Serviços
-                        <i class="ph ph-arrow-right"></i>
+                        <i class="ph ph-arrow-right group-hover:translate-x-1 duration-300"></i>
                     </button>
-                    <button class="px-8 py-3 rounded-full border border-white/20 text-xs uppercase tracking-widest hover:bg-white/5 hover:border-gold transition-all duration-300 text-white">
+                    <button class="px-8 py-3 rounded-full border border-white/20 text-xs uppercase tracking-widest hover:border-gold hover:text-gold transition-colors duration-300 text-white btn-ghost">
                         Nossa História
                     </button>
                 </div>
@@ -491,9 +544,11 @@
                     <div>
                         <h3 class="font-display text-2xl mb-8 border-b border-white/10 pb-4">Botões de Ação</h3>
                         <div class="flex flex-wrap gap-6 items-center">
-                            <button class="glow-button">Azul Royal (Primário)</button>
+                            <button class="glow-button flex items-center gap-2 group">
+                                Primário <i class="ph ph-arrow-right group-hover:translate-x-1 duration-300"></i>
+                            </button>
                             <button class="glow-button glow-red">Carmesim (Urgente)</button>
-                            <button class="px-6 py-3 rounded-full border border-white/20 text-xs uppercase tracking-widest hover:text-gold hover:border-gold transition-all duration-300">
+                            <button class="px-6 py-3 rounded-full border border-white/20 text-xs uppercase tracking-widest hover:text-gold hover:border-gold transition-colors duration-300 btn-ghost text-white">
                                 Botão Fantasma
                             </button>
                         </div>
