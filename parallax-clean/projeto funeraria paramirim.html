@@ -228,6 +228,17 @@
             background: rgba(255,255,255,0.05);
         }
 
+    /* Solemn Reveal Animation */
+        @keyframes solemnReveal {
+            0% { opacity: 0; transform: translateY(15px); filter: blur(8px); letter-spacing: 0.05em; }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0px); letter-spacing: 0.3em; }
+        }
+        .anim-solemn {
+            animation: solemnReveal 4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+            opacity: 0; 
+            text-transform: uppercase;
+        }
+
     </style>
 </head>
 <body class="antialiased">
@@ -250,7 +261,7 @@
         <a href="#" class="flex items-center gap-3 group">
             <div class="relative">
                 <div class="absolute inset-0 bg-gold/10 blur-xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <img src="../logo sem fundo.png" alt="Funerária Paramirim" class="h-10 md:h-12 w-auto relative z-10 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]" />
+                <img src="../logo sem fundo.png" alt="Funerária Paramirim" class="h-14 md:h-20 w-auto relative z-10 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]" />
             </div>
         </a>
         <div class="hidden md:flex gap-8 text-xs uppercase tracking-[0.2em] font-medium text-gray-300 items-center">
@@ -279,9 +290,11 @@
         
         <!-- 1) PRIMEIRA DOBRA / HERO -->
         <section class="h-screen relative flex items-center justify-center overflow-hidden hero-gradient">
-            <!-- Background Image with Parallax & Blend -->
-            <div class="absolute inset-0 w-full h-full opacity-30 mix-blend-overlay">
-                <img alt="Paz interior" class="w-full h-full object-cover hero-img" src="https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2070&auto=format&fit=crop"/>
+            <div class="absolute inset-0 w-full h-full bg-[#050A15] overflow-hidden">
+                <!-- Video Source -->
+                <video id="bg-video" autoplay muted loop playsinline class="absolute -top-[25%] left-0 w-full h-[150%] object-cover hero-video mix-blend-screen opacity-40" src="../Aerial_shot_over_202604092329.mp4"></video>
+                <!-- Overlay Gradient fading to the next section -->
+                <div class="absolute inset-0 bg-gradient-to-b from-[#050A15]/60 via-transparent to-[#050A15]"></div>
             </div>
             
             <!-- Abstract decorative element -->
@@ -289,9 +302,15 @@
             <div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-crimson/10 rounded-full blur-[80px] animate-float" style="animation-delay: 2s;"></div>
 
             <div class="relative z-10 text-center max-w-5xl px-6 flex flex-col items-center mt-16 md:mt-24">
-                <div class="mb-4 md:mb-6 opacity-0 hero-fade">
-                    <i class="ph-light ph-flower-lotus text-3xl md:text-4xl text-gold mb-2 md:mb-4 inline-block"></i>
-                    <p class="text-[0.6rem] md:text-xs uppercase tracking-[0.4em] text-gold font-semibold">Cuidado, Respeito e Tradição</p>
+                
+                <!-- NOME SOLENE -->
+                <div class="anim-solemn font-display text-lg md:text-xl text-offwhite mb-4">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-gold via-white to-gold text-shadow-lg font-semibold">Funerária Paramirim</span>
+                </div>
+
+                <div class="mb-4 md:mb-6 opacity-0 hero-fade flex flex-col items-center">
+                    <div class="w-12 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-4 opacity-50"></div>
+                    <p class="text-[0.6rem] md:text-[10px] uppercase tracking-[0.4em] text-gold font-light">Cuidado, Respeito e Tradição</p>
                 </div>
                 
                 <div style="-webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 40%); mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 40%); padding-bottom: 0.5rem;" class="flex flex-col items-center">
@@ -661,12 +680,13 @@
             });
             gsap.to('.hero-fade', { opacity: 1, y: 0, duration: 1.5, stagger: 0.2, delay: 0.8, ease: 'power2.out', startAt: {y: 20} });
             
-            // Hero Image Parallax
-            gsap.to('.hero-img', {
-                yPercent: 20,
+            // Hero Video Parallax and Fade on Scroll
+            gsap.to('.hero-video', {
+                yPercent: 30,
+                opacity: 0.1,
                 ease: 'none',
                 scrollTrigger: {
-                    trigger: '.hero-img',
+                    trigger: '.hero-gradient',
                     start: 'top top',
                     end: 'bottom top',
                     scrub: true
