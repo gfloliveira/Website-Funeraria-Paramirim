@@ -361,7 +361,7 @@
     <div class="wrapper">
         
         <!-- 1) PRIMEIRA DOBRA / HERO -->
-        <section class="min-h-[100svh] pt-32 pb-20 relative flex items-center justify-center overflow-hidden hero-gradient">
+        <section class="min-h-[100svh] pt-32 relative flex flex-col items-center overflow-hidden hero-gradient">
             <div class="absolute inset-0 w-full h-full bg-[#050A15] overflow-hidden">
                 <!-- Video Source -->
                 <video id="bg-video" autoplay muted loop playsinline class="absolute -top-[25%] left-0 w-full h-[150%] object-cover hero-video mix-blend-screen opacity-40" src="../Aerial_shot_over_202604092329.mp4"></video>
@@ -373,58 +373,55 @@
             <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-royal/20 rounded-full blur-[100px] animate-float mix-blend-screen"></div>
             <div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-crimson/10 rounded-full blur-[80px] animate-float" style="animation-delay: 2s;"></div>
 
-            <div class="relative z-10 text-center max-w-5xl px-6 flex flex-col items-center">
-                
-                <!-- NOME SOLENE -->
-                <div class="anim-solemn font-display text-lg md:text-xl text-offwhite mb-4">
-                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-gold via-white to-gold text-shadow-lg font-semibold">Funerária Paramirim</span>
-                </div>
+            <div class="flex-grow flex items-center justify-center w-full py-12 md:py-16">
+                <div class="relative z-10 text-center max-w-5xl px-6 flex flex-col items-center w-full">
+                    
+                    <!-- NOME SOLENE -->
+                    <div class="anim-solemn font-display text-lg md:text-xl text-offwhite mb-4">
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-gold via-white to-gold text-shadow-lg font-semibold">Funerária Paramirim</span>
+                    </div>
 
-                <div class="mb-4 md:mb-6 opacity-0 hero-fade flex flex-col items-center">
-                    <div class="w-12 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-4 opacity-50"></div>
-                    <p class="text-[0.6rem] md:text-[10px] uppercase tracking-[0.4em] text-gold font-light">Cuidado, Respeito e Tradição</p>
-                </div>
-                
-                <div style="-webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%); mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);" class="flex flex-col items-center">
-                    <h1 class="font-hero-custom text-[3.5rem] md:text-[6vw] leading-none hero-text overflow-hidden relative z-10 -mb-4 md:-mb-8">
-                        <span class="block translate-y-full text-white drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] px-12 pt-8 pb-10">Acolhimento</span>
-                    </h1>
-                    <h2 class="font-hero-custom text-[2.5rem] md:text-[3.5vw] leading-[0.8] hero-text overflow-hidden relative z-20 my-2 md:my-0">
-                        <span class="block translate-y-full text-gold drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] px-12 pt-6 pb-10">no momento de</span>
-                    </h2>
-                    <h1 class="font-hero-custom text-[4rem] md:text-[7vw] leading-none hero-text overflow-hidden relative z-10 -mt-2 md:-mt-6">
-                        <span class="block translate-y-full text-white drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] px-12 pt-6 pb-12">despedida</span>
-                    </h1>
-                </div>
-                
-                <p class="mt-6 md:mt-8 text-base md:text-lg font-light text-gray-300 max-w-2xl mx-auto opacity-0 hero-fade leading-relaxed">
-                    A Funerária Paramirim oferece suporte completo com empatia e dignidade. Um design system criado para transmitir paz e profissionalismo.
-                </p>
+                    <div class="mb-4 md:mb-6 opacity-0 hero-fade flex flex-col items-center">
+                        <div class="w-12 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-4 opacity-50"></div>
+                        <p class="text-[0.6rem] md:text-[10px] uppercase tracking-[0.4em] text-gold font-light">Cuidado, Respeito e Tradição</p>
+                    </div>
+                    
+                    <div style="-webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%); mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);" class="flex flex-col items-center">
+                        <h1 class="font-hero-custom text-[3.5rem] md:text-[6vw] leading-none hero-text overflow-hidden relative z-10 -mb-4 md:-mb-8">
+                            <span class="block translate-y-full text-white drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] px-12 pt-8 pb-10">Acolhimento</span>
+                        </h1>
+                        <h2 class="font-hero-custom text-[2.5rem] md:text-[3.5vw] leading-[0.8] hero-text overflow-hidden relative z-20 my-2 md:my-0">
+                            <span class="block translate-y-full text-gold drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] px-12 pt-6 pb-10">no momento de</span>
+                        </h2>
+                        <h1 class="font-hero-custom text-[4rem] md:text-[7vw] leading-none hero-text overflow-hidden relative z-10 -mt-2 md:-mt-6">
+                            <span class="block translate-y-full text-white drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] px-12 pt-6 pb-12">despedida</span>
+                        </h1>
+                    </div>
+                    
+                    <p class="mt-6 md:mt-8 text-base md:text-lg font-light text-gray-300 max-w-2xl mx-auto opacity-0 hero-fade leading-relaxed">
+                        A Funerária Paramirim oferece suporte completo com empatia e dignidade. Um design system criado para transmitir paz e profissionalismo.
+                    </p>
 
-                <div class="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-6 opacity-0 hero-fade">
-                    <button class="glow-button flex items-center justify-center gap-2 group">
-                        Ver Serviços
-                        <i class="ph ph-arrow-right group-hover:translate-x-1 duration-300"></i>
-                    </button>
-                    <button class="px-8 py-3 rounded-full border border-white/20 text-xs uppercase tracking-widest hover:border-gold hover:text-gold transition-colors duration-300 text-white btn-ghost">
-                        Nossa História
-                    </button>
+                    <div class="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-6 opacity-0 hero-fade">
+                        <button class="glow-button flex items-center justify-center gap-2 group">
+                            Ver Serviços
+                            <i class="ph ph-arrow-right group-hover:translate-x-1 duration-300"></i>
+                        </button>
+                        <button class="px-8 py-3 rounded-full border border-white/20 text-xs uppercase tracking-widest hover:border-gold hover:text-gold transition-colors duration-300 text-white btn-ghost">
+                            Nossa História
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 hero-fade">
-                <span class="text-[0.6rem] uppercase tracking-widest text-gray-400 mb-2">Descobrir</span>
-                <div class="w-[1px] h-12 bg-white/20 overflow-hidden relative">
-                    <div class="absolute top-0 left-0 w-full h-1/2 bg-gold animate-[slideDown_2s_ease-in-out_infinite]"></div>
+            <!-- Scroll Indicator Transição Contínua -->
+            <div class="relative z-10 w-full flex flex-col items-center opacity-0 hero-fade mt-auto pointer-events-none">
+                <span class="text-[0.65rem] uppercase tracking-[0.3em] text-gray-400 mb-4 font-light drop-shadow-md">Descobrir</span>
+                <div class="w-[1px] h-32 bg-gradient-to-b from-white/20 via-gold/50 to-transparent relative overflow-hidden -mb-16">
+                    <div class="absolute top-0 left-0 w-full h-1/2 bg-gold animate-[slideDown_2.5s_ease-in-out_infinite] shadow-[0_0_8px_#D4AF37]"></div>
                 </div>
             </div>
         </section>
-
-        <!-- SEPARADOR ELEGANTE -->
-        <div class="w-full flex justify-center py-10 section-gradient">
-            <div class="w-px h-20 bg-gradient-to-b from-transparent via-gold to-transparent opacity-50"></div>
-        </div>
 
         <!-- 2) TIPOGRAFIA -->
         <section id="typography" class="py-24 px-6 md:px-20 max-w-[1400px] mx-auto section-gradient relative">
