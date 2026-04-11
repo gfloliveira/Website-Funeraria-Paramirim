@@ -378,8 +378,8 @@
         <!-- 1) PRIMEIRA DOBRA / HERO -->
         <section class="min-h-[100svh] pt-32 relative flex flex-col items-center overflow-hidden hero-gradient">
             <div class="absolute inset-0 w-full h-full bg-[#050A15] overflow-hidden">
-                <!-- Video Source -->
-                <video id="bg-video" autoplay muted loop playsinline class="absolute -top-[25%] left-0 w-full h-[150%] object-cover hero-video mix-blend-screen opacity-40" src="../Aerial_shot_over_202604092329.mp4"></video>
+                <!-- Video Source: Apple-Style Parallax e Scrubbing -->
+                <video id="bg-video" muted playsinline preload="auto" class="absolute -top-[25%] left-0 w-full h-[150%] object-cover hero-video mix-blend-screen opacity-40" src="../Sunrise_to_storm_202604110604.mp4"></video>
                 <!-- Overlay Gradient fading to the next section -->
                 <div class="absolute inset-0 bg-gradient-to-b from-[#050A15]/60 via-transparent to-[#050A15]"></div>
             </div>
@@ -766,15 +766,41 @@
             });
             gsap.to('.hero-fade', { opacity: 1, y: 0, duration: 1.5, stagger: 0.2, delay: 0.8, ease: 'power2.out', startAt: {y: 20} });
             
-            // Hero Video Parallax and Fade on Scroll
+            // Hero Video Apple-Style Parallax and Scrub on Scroll
+            const bgVideo = document.getElementById("bg-video");
+            
+            function setupVideoScrub() {
+                bgVideo.pause(); // Ensure manual control
+                gsap.to(bgVideo, {
+                    currentTime: bgVideo.duration || 5,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.hero-gradient',
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: 1.5 // Buttery smooth scrubbing effect (Apple style)
+                    }
+                });
+            }
+
+            // Check if metadata is already loaded
+            if (bgVideo.readyState >= 1) {
+                setupVideoScrub();
+            } else {
+                bgVideo.addEventListener('loadedmetadata', setupVideoScrub);
+            }
+
+            // Transição Perfeita de Fundo (Scale + Fade + Parallax + Blur Sutil)
             gsap.to('.hero-video', {
-                yPercent: 30,
-                opacity: 0.1,
-                ease: 'none',
+                yPercent: 25,
+                scale: 1.15,
+                opacity: 0,
+                filter: "blur(15px)",
+                ease: 'power1.inOut',
                 scrollTrigger: {
                     trigger: '.hero-gradient',
                     start: 'top top',
-                    end: 'bottom top',
+                    end: 'bottom center', // Fades completely exactly when half scrolled
                     scrub: true
                 }
             });
