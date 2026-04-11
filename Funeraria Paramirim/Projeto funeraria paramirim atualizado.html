@@ -45,6 +45,25 @@
 
     <style>
         /* --- CORE --- */
+        @font-face {
+            font-family: 'Birds of Paradise';
+            src: url('Fontes/Birds of Paradise © PERSONAL USE ONLY.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        .font-hero-custom {
+            font-family: 'Birds of Paradise', cursive;
+            font-weight: normal;
+            font-style: normal;
+            line-height: normal;
+        }
+        
+        .font-hero-custom span {
+            letter-spacing: normal !important;
+        }
+
         :root {
             --c-bg: #F8F9FA;
             --c-dark: #050A15;
@@ -366,18 +385,15 @@
                     <p class="text-[0.6rem] md:text-[10px] uppercase tracking-[0.4em] text-gold font-light">Cuidado, Respeito e Tradição</p>
                 </div>
                 
-                <div style="-webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 40%); mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 40%); padding-bottom: 0.5rem;" class="flex flex-col items-center">
-                    <h1 class="font-display text-4xl md:text-[5.5vw] leading-[1.1] md:leading-[0.85] hero-text overflow-hidden relative z-10">
-                        <span class="block translate-y-full tracking-wide text-offwhite text-shadow-lg shadow-black">Acolhimento</span>
+                <div style="-webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%); mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%);" class="flex flex-col items-center">
+                    <h1 class="font-hero-custom text-[3.5rem] md:text-[6vw] leading-none hero-text overflow-hidden relative z-10 -mb-4 md:-mb-8">
+                        <span class="block translate-y-full text-white drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] px-12 pt-8 pb-10">Acolhimento</span>
                     </h1>
-                    <h2 class="font-display text-3xl md:text-[3.5vw] leading-[1.1] md:leading-[0.8] hero-text overflow-hidden my-1 md:my-0 relative z-20">
-                        <span class="block translate-y-full tracking-wide text-offwhite text-shadow-lg shadow-black">no</span>
+                    <h2 class="font-hero-custom text-[2.5rem] md:text-[3.5vw] leading-[0.8] hero-text overflow-hidden relative z-20 my-2 md:my-0">
+                        <span class="block translate-y-full text-gold drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] px-12 pt-6 pb-10">no momento de</span>
                     </h2>
-                    <h1 class="font-display text-4xl md:text-[5.5vw] leading-[1.1] md:leading-[0.95] hero-text overflow-hidden italic relative z-10">
-                        <span class="block translate-y-full text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-300">momento de</span>
-                    </h1>
-                    <h1 class="font-display text-4xl md:text-[5.5vw] leading-[1.1] md:leading-[0.95] hero-text overflow-hidden italic">
-                        <span class="block translate-y-full text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-400">despedida</span>
+                    <h1 class="font-hero-custom text-[4rem] md:text-[7vw] leading-none hero-text overflow-hidden relative z-10 -mt-2 md:-mt-6">
+                        <span class="block translate-y-full text-white drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] px-12 pt-6 pb-12">despedida</span>
                     </h1>
                 </div>
                 
