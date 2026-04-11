@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Design System - Funerária Paramirim</title>
-    
+
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- GSAP / Lenis -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -48,8 +51,8 @@
         :root {
             --c-bg: #F8F9FA;
             --c-dark: #050A15;
-            --c-primary: #0F3073; 
-            --c-accent: #A31621;  
+            --c-primary: #0F3073;
+            --c-accent: #A31621;
             --font-display: 'Playfair Display', serif;
             --font-body: 'Inter', sans-serif;
         }
@@ -60,7 +63,7 @@
             font-family: var(--font-body);
             margin: 0;
             overflow-x: hidden;
-            opacity: 0; 
+            opacity: 0;
         }
 
         /* --- LAYOUT UTILS --- */
@@ -77,6 +80,7 @@
             vertical-align: top;
             padding-bottom: 0.1em;
         }
+
         .word-inner {
             display: inline-block;
             transform: translateY(110%);
@@ -94,6 +98,7 @@
             color: #fff;
             flex-direction: column;
         }
+
         .loader-text {
             font-family: var(--font-display);
             font-size: 3vw;
@@ -102,13 +107,15 @@
             margin-bottom: 2rem;
             color: var(--c-bg);
         }
+
         .loader-bar-wrap {
             width: 200px;
             height: 2px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
         }
+
         .loader-bar {
             position: absolute;
             top: 0;
@@ -129,7 +136,7 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
             font-size: 0.75rem;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.4s ease;
             overflow: hidden;
             z-index: 1;
@@ -151,7 +158,7 @@
         .glow-button:hover {
             box-shadow: 0 0 20px rgba(36, 83, 179, 0.6);
             transform: translateY(-2px);
-            border-color: rgba(255,255,255,0.6);
+            border-color: rgba(255, 255, 255, 0.6);
         }
 
         .glow-button:hover::before {
@@ -162,29 +169,34 @@
             background: var(--c-accent);
             animation: emergencyPulse 2.5s infinite;
         }
+
         .glow-red::before {
             background: linear-gradient(45deg, var(--c-accent), #D62231, var(--c-accent));
         }
+
         .glow-red:hover {
             animation: none;
-            box-shadow: 0 0 25px rgba(214, 34, 49, 0.8), inset 0 0 10px rgba(255,255,255,0.2);
+            box-shadow: 0 0 25px rgba(214, 34, 49, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
 
         .card-inner {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
             position: relative;
         }
-        
+
         .card-inner::after {
             content: '';
             position: absolute;
-            top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent);
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.06), transparent);
             transform: skewX(-25deg);
             transition: left 0.75s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
@@ -192,7 +204,7 @@
 
         .card-inner:hover {
             border-color: rgba(212, 175, 55, 0.3);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 20px rgba(212, 175, 55, 0.05);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(212, 175, 55, 0.05);
             transform: translateY(-5px);
         }
 
@@ -206,16 +218,21 @@
             overflow: hidden;
             z-index: 1;
         }
+
         .btn-ghost::before {
             content: '';
             position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 100%;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(212, 175, 55, 0.1);
             transform: scaleY(0);
             transform-origin: bottom;
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: -1;
         }
+
         .btn-ghost:hover::before {
             transform: scaleY(1);
         }
@@ -232,15 +249,24 @@
         .glass-nav {
             background: rgba(5, 10, 21, 0.7);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         /* Floating elements animation */
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
+
         .animate-float {
             animation: float 6s ease-in-out infinite;
         }
@@ -248,61 +274,91 @@
         .hero-gradient {
             background: radial-gradient(circle at 50% 50%, rgba(15, 48, 115, 0.4) 0%, rgba(5, 10, 21, 1) 70%);
         }
-        
+
         .section-gradient {
             background: linear-gradient(to bottom, #050A15, #0a1120);
         }
 
         .input-elegant {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
             transition: all 0.3s ease;
         }
+
         .input-elegant:focus {
             outline: none;
             border-color: var(--c-primary);
             box-shadow: 0 0 15px rgba(15, 48, 115, 0.5);
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         /* Ambient Keyframes */
         @keyframes emergencyPulse {
-            0% { box-shadow: 0 0 0 0 rgba(163, 22, 33, 0.5); }
-            70% { box-shadow: 0 0 0 15px rgba(163, 22, 33, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(163, 22, 33, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(163, 22, 33, 0.5);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(163, 22, 33, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(163, 22, 33, 0);
+            }
         }
 
         @keyframes etherealGlow {
-            0%, 100% { filter: drop-shadow(0 0 8px rgba(212,175,55,0.2)) scale(1); }
-            50% { filter: drop-shadow(0 0 25px rgba(212,175,55,0.6)) scale(1.04); }
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.2)) scale(1);
+            }
+
+            50% {
+                filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.6)) scale(1.04);
+            }
         }
+
         .anim-ethereal {
             animation: etherealGlow 4s ease-in-out infinite;
         }
 
-    /* Solemn Reveal Animation */
+        /* Solemn Reveal Animation */
         @keyframes solemnReveal {
-            0% { opacity: 0; transform: translateY(15px); filter: blur(8px); letter-spacing: 0.05em; }
-            100% { opacity: 1; transform: translateY(0); filter: blur(0px); letter-spacing: 0.3em; }
-        }
-        .anim-solemn {
-            animation: solemnReveal 4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
-            opacity: 0; 
-            text-transform: uppercase;
+            0% {
+                opacity: 0;
+                transform: translateY(15px);
+                filter: blur(8px);
+                letter-spacing: 0.05em;
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0px);
+                letter-spacing: 0.3em;
+            }
         }
 
+        .anim-solemn {
+            animation: solemnReveal 4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+            opacity: 0;
+            text-transform: uppercase;
+        }
     </style>
 </head>
+
 <body class="antialiased">
     <!-- UTILS -->
     <div class="noise-overlay"></div>
-    
+
     <!-- PRELOADER -->
     <div class="loader">
         <div class="relative mb-8 flex justify-center items-center">
             <div class="absolute inset-0 bg-gold/20 blur-2xl rounded-full scale-110"></div>
-            <img src="../logo sem fundo.png" alt="Funerária Paramirim" class="h-16 md:h-24 w-auto relative z-10 anim-ethereal" />
+            <img src="../logo%20sem%20fundo.png" alt="Funerária Paramirim"
+                class="h-16 md:h-24 w-auto relative z-10 anim-ethereal" />
         </div>
         <div class="loader-bar-wrap bg-white/5 overflow-hidden rounded-full h-[2px]">
             <div class="loader-bar h-full"></div>
@@ -313,14 +369,18 @@
     <nav class="fixed top-0 w-full p-6 flex justify-between items-center z-50 glass-nav transition-all duration-300">
         <a href="#" class="flex items-center gap-3 group">
             <div class="relative">
-                <div class="absolute inset-0 bg-gold/10 blur-xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <img src="../logo sem fundo.png" alt="Funerária Paramirim" class="h-14 md:h-20 w-auto relative z-10 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]" />
+                <div
+                    class="absolute inset-0 bg-gold/10 blur-xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                </div>
+                <img src="../logo%20sem%20fundo.png" alt="Funerária Paramirim"
+                    class="h-14 md:h-20 w-auto relative z-10 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]" />
             </div>
         </a>
         <div class="hidden md:flex gap-8 text-xs uppercase tracking-[0.2em] font-medium text-gray-300 items-center">
             <a class="hover:text-gold transition-colors relative group" href="#typography">
                 Tipografia
-                <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full"></span>
+                <span
+                    class="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full"></span>
             </a>
             <a class="hover:text-gold transition-colors relative group" href="#colors">
                 Cores
@@ -340,49 +400,70 @@
 
     <!-- WRAPPER -->
     <div class="wrapper">
-        
+
         <!-- 1) PRIMEIRA DOBRA / HERO -->
         <section class="h-screen relative flex items-center justify-center overflow-hidden hero-gradient">
             <div class="absolute inset-0 w-full h-full bg-[#050A15] overflow-hidden">
                 <!-- Video Source -->
-                <video id="bg-video" autoplay muted loop playsinline class="absolute -top-[25%] left-0 w-full h-[150%] object-cover hero-video mix-blend-screen opacity-40" src="../Aerial_shot_over_202604092329.mp4"></video>
+                <video id="bg-video" autoplay muted loop playsinline
+                    class="absolute -top-[25%] left-0 w-full h-[150%] object-cover hero-video mix-blend-screen opacity-40"
+                    src="../Aerial_shot_over_202604092329.mp4"></video>
                 <!-- Overlay Gradient fading to the next section -->
                 <div class="absolute inset-0 bg-gradient-to-b from-[#050A15]/60 via-transparent to-[#050A15]"></div>
             </div>
-            
+
             <!-- Abstract decorative element -->
-            <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-royal/20 rounded-full blur-[100px] animate-float mix-blend-screen"></div>
-            <div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-crimson/10 rounded-full blur-[80px] animate-float" style="animation-delay: 2s;"></div>
+            <div
+                class="absolute top-1/4 right-1/4 w-96 h-96 bg-royal/20 rounded-full blur-[100px] animate-float mix-blend-screen">
+            </div>
+            <div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-crimson/10 rounded-full blur-[80px] animate-float"
+                style="animation-delay: 2s;"></div>
 
             <div class="relative z-10 text-center max-w-5xl px-6 flex flex-col items-center mt-16 md:mt-24">
-                
+
                 <!-- NOME SOLENE -->
                 <div class="anim-solemn font-display text-lg md:text-xl text-offwhite mb-4">
-                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-gold via-white to-gold text-shadow-lg font-semibold">Funerária Paramirim</span>
+                    <span
+                        class="bg-clip-text text-transparent bg-gradient-to-r from-gold via-white to-gold text-shadow-lg font-semibold">Funerária
+                        Paramirim</span>
                 </div>
 
                 <div class="mb-4 md:mb-6 opacity-0 hero-fade flex flex-col items-center">
-                    <div class="w-12 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-4 opacity-50"></div>
-                    <p class="text-[0.6rem] md:text-[10px] uppercase tracking-[0.4em] text-gold font-light">Cuidado, Respeito e Tradição</p>
+                    <div class="w-12 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-4 opacity-50">
+                    </div>
+                    <p class="text-[0.6rem] md:text-[10px] uppercase tracking-[0.4em] text-gold font-light">Cuidado,
+                        Respeito e Tradição</p>
                 </div>
-                
-                <div style="-webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 40%); mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 40%); padding-bottom: 0.5rem;" class="flex flex-col items-center">
-                    <h1 class="font-display text-4xl md:text-[5.5vw] leading-[1.1] md:leading-[0.85] hero-text overflow-hidden relative z-10">
-                        <span class="block translate-y-full tracking-wide text-offwhite text-shadow-lg shadow-black">Acolhimento</span>
+
+                <div style="-webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 40%); mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 40%); padding-bottom: 0.5rem;"
+                    class="flex flex-col items-center">
+                    <h1
+                        class="font-display text-4xl md:text-[5.5vw] leading-[1.1] md:leading-[0.85] hero-text overflow-hidden relative z-10">
+                        <span
+                            class="block translate-y-full tracking-wide text-offwhite text-shadow-lg shadow-black">Acolhimento</span>
                     </h1>
-                    <h2 class="font-display text-3xl md:text-[3.5vw] leading-[1.1] md:leading-[0.8] hero-text overflow-hidden my-1 md:my-0 relative z-20">
-                        <span class="block translate-y-full tracking-wide text-offwhite text-shadow-lg shadow-black">no</span>
+                    <h2
+                        class="font-display text-3xl md:text-[3.5vw] leading-[1.1] md:leading-[0.8] hero-text overflow-hidden my-1 md:my-0 relative z-20">
+                        <span
+                            class="block translate-y-full tracking-wide text-offwhite text-shadow-lg shadow-black">no</span>
                     </h2>
-                    <h1 class="font-display text-4xl md:text-[5.5vw] leading-[1.1] md:leading-[0.95] hero-text overflow-hidden italic relative z-10">
-                        <span class="block translate-y-full text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-300">momento de</span>
+                    <h1
+                        class="font-display text-4xl md:text-[5.5vw] leading-[1.1] md:leading-[0.95] hero-text overflow-hidden italic relative z-10">
+                        <span
+                            class="block translate-y-full text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-300">momento
+                            de</span>
                     </h1>
-                    <h1 class="font-display text-4xl md:text-[5.5vw] leading-[1.1] md:leading-[0.95] hero-text overflow-hidden italic">
-                        <span class="block translate-y-full text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-400">despedida</span>
+                    <h1
+                        class="font-display text-4xl md:text-[5.5vw] leading-[1.1] md:leading-[0.95] hero-text overflow-hidden italic">
+                        <span
+                            class="block translate-y-full text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-400">despedida</span>
                     </h1>
                 </div>
-                
-                <p class="mt-6 md:mt-8 text-base md:text-lg font-light text-gray-300 max-w-2xl mx-auto opacity-0 hero-fade leading-relaxed">
-                    A Funerária Paramirim oferece suporte completo com empatia e dignidade. Um design system criado para transmitir paz e profissionalismo.
+
+                <p
+                    class="mt-6 md:mt-8 text-base md:text-lg font-light text-gray-300 max-w-2xl mx-auto opacity-0 hero-fade leading-relaxed">
+                    A Funerária Paramirim oferece suporte completo com empatia e dignidade. Um design system criado para
+                    transmitir paz e profissionalismo.
                 </p>
 
                 <div class="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-6 opacity-0 hero-fade">
@@ -390,17 +471,20 @@
                         Ver Serviços
                         <i class="ph ph-arrow-right group-hover:translate-x-1 duration-300"></i>
                     </button>
-                    <button class="px-8 py-3 rounded-full border border-white/20 text-xs uppercase tracking-widest hover:border-gold hover:text-gold transition-colors duration-300 text-white btn-ghost">
+                    <button
+                        class="px-8 py-3 rounded-full border border-white/20 text-xs uppercase tracking-widest hover:border-gold hover:text-gold transition-colors duration-300 text-white btn-ghost">
                         Nossa História
                     </button>
                 </div>
             </div>
 
             <!-- Scroll Indicator -->
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 hero-fade">
+            <div
+                class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 hero-fade">
                 <span class="text-[0.6rem] uppercase tracking-widest text-gray-400 mb-2">Descobrir</span>
                 <div class="w-[1px] h-12 bg-white/20 overflow-hidden relative">
-                    <div class="absolute top-0 left-0 w-full h-1/2 bg-gold animate-[slideDown_2s_ease-in-out_infinite]"></div>
+                    <div class="absolute top-0 left-0 w-full h-1/2 bg-gold animate-[slideDown_2s_ease-in-out_infinite]">
+                    </div>
                 </div>
             </div>
         </section>
@@ -415,7 +499,7 @@
             <div class="text-xs uppercase tracking-widest mb-16 text-gold flex items-center gap-4 split-animate">
                 <span class="w-8 h-px bg-gold"></span> 01 / Sistema Tipográfico
             </div>
-            
+
             <div class="space-y-16">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-baseline pb-12 border-b border-white/10">
                     <div class="text-xs uppercase tracking-widest text-gray-500">Headline 1</div>
@@ -423,7 +507,7 @@
                         <h1 class="font-display text-5xl md:text-6xl text-offwhite">Respeito Absoluto</h1>
                     </div>
                     <div class="text-right text-xs text-gray-400 font-mono">
-                        Playfair Display<br/>Weight: 400<br/>Size: 4rem<br/>Letter Spacing: Normal
+                        Playfair Display<br />Weight: 400<br />Size: 4rem<br />Letter Spacing: Normal
                     </div>
                 </div>
 
@@ -433,7 +517,7 @@
                         <h3 class="font-display text-3xl italic text-offwhite">Planos de Assistência</h3>
                     </div>
                     <div class="text-right text-xs text-gray-400 font-mono">
-                        Playfair Display<br/>Weight: 400 Italic<br/>Size: 1.875rem
+                        Playfair Display<br />Weight: 400 Italic<br />Size: 1.875rem
                     </div>
                 </div>
 
@@ -441,14 +525,15 @@
                     <div class="text-xs uppercase tracking-widest text-gray-500">Body Large</div>
                     <div class="md:col-span-2">
                         <p class="font-body text-lg font-light leading-relaxed text-gray-300">
-                            Nossa equipe está preparada para cuidar de todos os trâmites legais, garantindo que sua família tenha espaço para viver o luto com tranquilidade.
+                            Nossa equipe está preparada para cuidar de todos os trâmites legais, garantindo que sua
+                            família tenha espaço para viver o luto com tranquilidade.
                         </p>
                     </div>
                     <div class="text-right text-xs text-gray-400 font-mono">
-                        Inter<br/>Weight: 300<br/>Size: 1.125rem<br/>Line Height: Relaxed
+                        Inter<br />Weight: 300<br />Size: 1.125rem<br />Line Height: Relaxed
                     </div>
                 </div>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-baseline pb-12 border-b border-white/10">
                     <div class="text-xs uppercase tracking-widest text-gray-500">Labels / Links</div>
                     <div class="md:col-span-2">
@@ -457,7 +542,7 @@
                         </p>
                     </div>
                     <div class="text-right text-xs text-gray-400 font-mono">
-                        Inter<br/>Weight: 500<br/>Size: 0.75rem<br/>Letter Spacing: 0.2em<br/>Uppercase
+                        Inter<br />Weight: 500<br />Size: 0.75rem<br />Letter Spacing: 0.2em<br />Uppercase
                     </div>
                 </div>
             </div>
@@ -478,7 +563,8 @@
                     <div class="p-4 bg-dark-navy">
                         <h4 class="font-bold text-sm text-offwhite mb-1">Azul Royal</h4>
                         <p class="text-xs text-gray-500 font-mono mb-2">#0F3073</p>
-                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: Elementos primários, botões principais, fundos de destaque. Transmite confiança e seriedade.</p>
+                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: Elementos primários, botões
+                            principais, fundos de destaque. Transmite confiança e seriedade.</p>
                     </div>
                 </div>
 
@@ -490,7 +576,8 @@
                     <div class="p-4 bg-dark-navy">
                         <h4 class="font-bold text-sm text-offwhite mb-1">Vermelho Carmesim</h4>
                         <p class="text-xs text-gray-500 font-mono mb-2">#A31621</p>
-                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: CTAs urgentes (Plantão 24h), badges de alerta. Usado com moderação para contraste.</p>
+                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: CTAs urgentes (Plantão 24h), badges
+                            de alerta. Usado com moderação para contraste.</p>
                     </div>
                 </div>
 
@@ -502,7 +589,8 @@
                     <div class="p-4 bg-dark-navy">
                         <h4 class="font-bold text-sm text-offwhite mb-1">Dourado</h4>
                         <p class="text-xs text-gray-500 font-mono mb-2">#D4AF37</p>
-                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: Ícones, separadores, hovers. Traz um tom premium, celestial e de honra.</p>
+                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: Ícones, separadores, hovers. Traz um
+                            tom premium, celestial e de honra.</p>
                     </div>
                 </div>
 
@@ -514,7 +602,8 @@
                     <div class="p-4 bg-dark-navy">
                         <h4 class="font-bold text-sm text-offwhite mb-1">Branco Suave</h4>
                         <p class="text-xs text-gray-500 font-mono mb-2">#F8F9FA</p>
-                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: Texto principal sobre fundos escuros. Menos agressivo que o branco puro.</p>
+                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: Texto principal sobre fundos escuros.
+                            Menos agressivo que o branco puro.</p>
                     </div>
                 </div>
 
@@ -526,7 +615,8 @@
                     <div class="p-4 bg-dark-navy">
                         <h4 class="font-bold text-sm text-offwhite mb-1">Azul Noturno</h4>
                         <p class="text-xs text-gray-500 font-mono mb-2">#050A15</p>
-                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: Fundo base do site. Cria um ambiente solene, elegante e respeitoso.</p>
+                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: Fundo base do site. Cria um ambiente
+                            solene, elegante e respeitoso.</p>
                     </div>
                 </div>
             </div>
@@ -548,22 +638,27 @@
                                 Primário <i class="ph ph-arrow-right group-hover:translate-x-1 duration-300"></i>
                             </button>
                             <button class="glow-button glow-red">Carmesim (Urgente)</button>
-                            <button class="px-6 py-3 rounded-full border border-white/20 text-xs uppercase tracking-widest hover:text-gold hover:border-gold transition-colors duration-300 btn-ghost text-white">
+                            <button
+                                class="px-6 py-3 rounded-full border border-white/20 text-xs uppercase tracking-widest hover:text-gold hover:border-gold transition-colors duration-300 btn-ghost text-white">
                                 Botão Fantasma
                             </button>
                         </div>
                     </div>
-                    
+
                     <div>
                         <h3 class="font-display text-2xl mb-8 border-b border-white/10 pb-4">Inputs e Formulários</h3>
                         <div class="space-y-4 max-w-md">
                             <div>
-                                <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Nome Completo</label>
-                                <input type="text" class="w-full px-4 py-3 rounded-lg input-elegant text-sm" placeholder="Digite seu nome">
+                                <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Nome
+                                    Completo</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg input-elegant text-sm"
+                                    placeholder="Digite seu nome">
                             </div>
                             <div>
-                                <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Mensagem</label>
-                                <textarea class="w-full px-4 py-3 rounded-lg input-elegant text-sm h-24 resize-none" placeholder="Como podemos ajudar?"></textarea>
+                                <label
+                                    class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Mensagem</label>
+                                <textarea class="w-full px-4 py-3 rounded-lg input-elegant text-sm h-24 resize-none"
+                                    placeholder="Como podemos ajudar?"></textarea>
                             </div>
                         </div>
                     </div>
@@ -571,11 +666,16 @@
                     <div>
                         <h3 class="font-display text-2xl mb-8 border-b border-white/10 pb-4">Badges e Tooltips</h3>
                         <div class="flex gap-4">
-                            <span class="px-3 py-1 rounded-full bg-royal/20 border border-royal text-royal-light text-xs font-medium">Plano Prata</span>
-                            <span class="px-3 py-1 rounded-full bg-gold/10 border border-gold/50 text-gold text-xs font-medium">Recomendado</span>
-                            <span class="relative group cursor-pointer text-gray-400 text-sm border-b border-dashed border-gray-600 pb-1">
+                            <span
+                                class="px-3 py-1 rounded-full bg-royal/20 border border-royal text-royal-light text-xs font-medium">Plano
+                                Prata</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-gold/10 border border-gold/50 text-gold text-xs font-medium">Recomendado</span>
+                            <span
+                                class="relative group cursor-pointer text-gray-400 text-sm border-b border-dashed border-gray-600 pb-1">
                                 Passe o mouse via Tooltip
-                                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max px-3 py-2 bg-white text-dark-navy text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl pointer-events-none">
+                                <div
+                                    class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max px-3 py-2 bg-white text-dark-navy text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl pointer-events-none">
                                     Informação adicional elegante
                                 </div>
                             </span>
@@ -590,23 +690,33 @@
                         <!-- Card Serviço -->
                         <div class="card-inner p-8 rounded-2xl relative group cursor-pointer stack-item">
                             <!-- Glow decorativo -->
-                            <div class="absolute -top-12 -right-12 w-32 h-32 bg-royal/30 rounded-full blur-2xl group-hover:bg-gold/20 transition-colors duration-500"></div>
-                            
+                            <div
+                                class="absolute -top-12 -right-12 w-32 h-32 bg-royal/30 rounded-full blur-2xl group-hover:bg-gold/20 transition-colors duration-500">
+                            </div>
+
                             <i class="ph-light ph-church text-4xl text-gold mb-6"></i>
                             <h3 class="font-display text-2xl mb-3 text-offwhite">Cerimonial Completo</h3>
-                            <p class="font-light text-sm text-gray-400 mb-6 leading-relaxed">Organização completa do velório e homenagens póstumas, com arranjos florais, música suave e coordenação atenta.</p>
-                            
-                            <div class="flex items-center text-xs uppercase tracking-widest font-medium text-royal-light group-hover:text-gold transition-colors duration-300">
-                                Detalhes do serviço <i class="ph-bold ph-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-300"></i>
+                            <p class="font-light text-sm text-gray-400 mb-6 leading-relaxed">Organização completa do
+                                velório e homenagens póstumas, com arranjos florais, música suave e coordenação atenta.
+                            </p>
+
+                            <div
+                                class="flex items-center text-xs uppercase tracking-widest font-medium text-royal-light group-hover:text-gold transition-colors duration-300">
+                                Detalhes do serviço <i
+                                    class="ph-bold ph-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-300"></i>
                             </div>
                         </div>
 
                         <!-- Card Imagem -->
-                        <div class="card-inner rounded-2xl relative overflow-hidden group h-[220px] stack-item transform translate-y-4">
-                            <img src="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?q=80&w=2075&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-[1.5s]" alt="Flores brancas">
+                        <div
+                            class="card-inner rounded-2xl relative overflow-hidden group h-[220px] stack-item transform translate-y-4">
+                            <img src="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?q=80&w=2075&auto=format&fit=crop"
+                                class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-[1.5s]"
+                                alt="Flores brancas">
                             <div class="absolute inset-0 bg-gradient-to-t from-dark-navy to-transparent"></div>
                             <div class="absolute bottom-0 left-0 p-8 w-full">
-                                <span class="px-2 py-1 bg-crimson/80 text-white text-[10px] uppercase tracking-widest rounded mb-3 inline-block">Instruções</span>
+                                <span
+                                    class="px-2 py-1 bg-crimson/80 text-white text-[10px] uppercase tracking-widest rounded mb-3 inline-block">Instruções</span>
                                 <h3 class="font-display text-xl text-offwhite">O que fazer em caso de óbito?</h3>
                             </div>
                         </div>
@@ -616,13 +726,16 @@
         </section>
 
         <!-- 5) ANIMAÇÕES -->
-        <section id="animations" class="py-24 px-6 md:px-20 max-w-[1400px] mx-auto text-center border-t border-white/5 section-gradient">
-             <div class="text-xs uppercase tracking-widest mb-8 text-gold justify-center flex items-center gap-4 split-animate">
+        <section id="animations"
+            class="py-24 px-6 md:px-20 max-w-[1400px] mx-auto text-center border-t border-white/5 section-gradient">
+            <div
+                class="text-xs uppercase tracking-widest mb-8 text-gold justify-center flex items-center gap-4 split-animate">
                 <span class="w-8 h-px bg-gold"></span> 04 / Coreografia (Animações)
             </div>
             <h2 class="font-display text-4xl mb-6 split-animate">Movimentos Suaves e Respeitosos</h2>
             <p class="text-gray-400 font-light max-w-2xl mx-auto mb-16 split-animate">
-                As animações deste projeto focam em revelações graduais (`Fade-in` e `Slide-up`), evitando movimentos bruscos. O uso de GSAP e Lenis garante uma navegação serena, simulando fluidez.
+                As animações deste projeto focam em revelações graduais (`Fade-in` e `Slide-up`), evitando movimentos
+                bruscos. O uso de GSAP e Lenis garante uma navegação serena, simulando fluidez.
             </p>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
@@ -651,11 +764,15 @@
 
         <!-- FOOTER -->
         <footer class="py-16 md:py-20 border-t border-white/5 bg-[#02050A] text-center relative overflow-hidden">
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-royal/10 rounded-full blur-[100px] pointer-events-none"></div>
-            
+            <div
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-royal/10 rounded-full blur-[100px] pointer-events-none">
+            </div>
+
             <div class="relative z-10 flex flex-col items-center">
-                <img src="../logo sem fundo.png" alt="Funerária Paramirim" class="h-16 md:h-20 w-auto mb-8 drop-shadow-[0_0_15px_rgba(212,175,55,0.15)] opacity-80 hover:opacity-100 transition-opacity duration-500" />
-                <div class="text-[0.65rem] md:text-xs uppercase tracking-widest text-gray-500 font-medium font-body mb-2">
+                <img src="../logo%20sem%20fundo.png" alt="Funerária Paramirim"
+                    class="h-16 md:h-20 w-auto mb-8 drop-shadow-[0_0_15px_rgba(212,175,55,0.15)] opacity-80 hover:opacity-100 transition-opacity duration-500" />
+                <div
+                    class="text-[0.65rem] md:text-xs uppercase tracking-widest text-gray-500 font-medium font-body mb-2">
                     Design System · Funerária Paramirim · 2025
                 </div>
                 <div class="text-[10px] text-gray-600">
@@ -669,8 +786,13 @@
     <!-- ANIMAÇÕES SCRIPTS -->
     <style>
         @keyframes slideDown {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(200%); }
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(200%);
+            }
         }
     </style>
 
@@ -717,24 +839,24 @@
         });
 
         loadTl.to('.loader-bar', { width: '100%', duration: 1.8, ease: 'power2.inOut' })
-              .to('.loader-text', { y: -20, opacity: 0, duration: 0.6 }, "-=0.2")
-              .to('.loader-bar-wrap', { opacity: 0, duration: 0.4 }, "<")
-              .to('.loader', { yPercent: -100, duration: 1.2, ease: 'power4.inOut' });
+            .to('.loader-text', { y: -20, opacity: 0, duration: 0.6 }, "-=0.2")
+            .to('.loader-bar-wrap', { opacity: 0, duration: 0.4 }, "<")
+            .to('.loader', { yPercent: -100, duration: 1.2, ease: 'power4.inOut' });
 
         function initSite() {
             // Hero
-            gsap.fromTo('.hero-text span', 
+            gsap.fromTo('.hero-text span',
                 { y: '100%', opacity: 0 },
-                { 
-                y: 0, 
-                opacity: 1,
-                stagger: 0.15, 
-                duration: 1.5, 
-                ease: 'power4.out',
-                delay: 0.2
-            });
-            gsap.to('.hero-fade', { opacity: 1, y: 0, duration: 1.5, stagger: 0.2, delay: 0.8, ease: 'power2.out', startAt: {y: 20} });
-            
+                {
+                    y: 0,
+                    opacity: 1,
+                    stagger: 0.15,
+                    duration: 1.5,
+                    ease: 'power4.out',
+                    delay: 0.2
+                });
+            gsap.to('.hero-fade', { opacity: 1, y: 0, duration: 1.5, stagger: 0.2, delay: 0.8, ease: 'power2.out', startAt: { y: 20 } });
+
             // Hero Video Parallax and Fade on Scroll
             gsap.to('.hero-video', {
                 yPercent: 30,
@@ -796,4 +918,5 @@
         }
     </script>
 </body>
+
 </html>
