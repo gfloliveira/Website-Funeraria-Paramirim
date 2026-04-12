@@ -364,7 +364,7 @@
                 Orientações
                 <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <button class="glow-button glow-red ml-4 shadow-lg shadow-crimson/20" onclick="abrirWhatsAppEmergencia()">Plantão 24h</button>
+            <button class="glow-button glow-red ml-4 shadow-lg shadow-crimson/20" onclick="abrirWhatsApp()">Plantão 24h</button>
         </div>
         <div class="md:hidden text-gold text-2xl">
             <i class="ph ph-list"></i>
@@ -420,7 +420,7 @@
                     </p>
 
                     <div class="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-6 opacity-0 hero-fade">
-                        <button class="glow-button glow-red flex items-center justify-center gap-2 group" onclick="abrirWhatsAppEmergencia()">
+                        <button class="glow-button glow-red flex items-center justify-center gap-2 group" onclick="abrirWhatsApp()">
                             <i class="ph-bold ph-whatsapp-logo text-xl"></i> Plantão 24h: Amparo Imediato
                         </button>
                         <button class="px-8 py-3 rounded-full border border-white/20 text-xs uppercase tracking-widest hover:border-gold hover:text-gold transition-colors duration-300 text-white btn-ghost" onclick="document.getElementById('servicos').scrollIntoView({behavior: 'smooth'})">
@@ -501,7 +501,7 @@
                         <h3 class="font-display text-xl mb-3 text-offwhite relative z-10">Plano Convencional</h3>
                         <p class="font-light text-sm text-gray-400 mb-6 leading-relaxed relative z-10">Cobertura fundamental e acolhimento com o respeito que sua família merece, garantindo tranquilidade no luto.</p>
                         
-                        <div class="mt-auto flex items-center text-xs uppercase tracking-widest font-medium text-royal-light group-hover:text-gold transition-colors duration-300 relative z-10 cursor-pointer" onclick="abrirWhatsAppEmergencia(event)">
+                        <div class="mt-auto flex items-center text-xs uppercase tracking-widest font-medium text-royal-light group-hover:text-gold transition-colors duration-300 relative z-10 cursor-pointer" onclick="abrirWhatsApp('Olá! Gostaria de falar com um consultor sobre o Plano Convencional.')">
                             Falar com consultor <i class="ph-bold ph-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-300"></i>
                         </div>
                     </div>
@@ -516,7 +516,7 @@
                         <h3 class="font-display text-xl mb-3 text-offwhite relative z-10">Plano Semi-Luxo</h3>
                         <p class="font-light text-sm text-gray-400 mb-6 leading-relaxed relative z-10">Amparo estendido com detalhes de conforto que garantem mais serenidade e paz de espírito.</p>
                         
-                        <div class="mt-auto flex items-center text-xs uppercase tracking-widest font-medium text-royal-light group-hover:text-gold transition-colors duration-300 relative z-10 cursor-pointer" onclick="abrirWhatsAppEmergencia(event)">
+                        <div class="mt-auto flex items-center text-xs uppercase tracking-widest font-medium text-royal-light group-hover:text-gold transition-colors duration-300 relative z-10 cursor-pointer" onclick="abrirWhatsApp('Olá! Gostaria de falar com um consultor sobre o Plano Semi-Luxo.')">
                             Falar com consultor <i class="ph-bold ph-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-300"></i>
                         </div>
                     </div>
@@ -529,7 +529,7 @@
                         <h3 class="font-display text-xl mb-3 text-offwhite relative z-10">Plano Luxo</h3>
                         <p class="font-light text-sm text-gray-400 mb-6 leading-relaxed relative z-10">Alto padrão de homenagem, com serviços exclusivos, frota premium e cuidado absoluto em cada detalhe.</p>
                         
-                        <div class="mt-auto flex items-center text-xs uppercase tracking-widest font-medium text-royal-light group-hover:text-gold transition-colors duration-300 relative z-10 cursor-pointer" onclick="abrirWhatsAppEmergencia(event)">
+                        <div class="mt-auto flex items-center text-xs uppercase tracking-widest font-medium text-royal-light group-hover:text-gold transition-colors duration-300 relative z-10 cursor-pointer" onclick="abrirWhatsApp('Olá! Gostaria de falar com um consultor sobre o Plano Luxo.')">
                             Falar com consultor <i class="ph-bold ph-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-300"></i>
                         </div>
                     </div>
@@ -542,7 +542,7 @@
                         <h3 class="font-display text-xl mb-3 text-offwhite relative z-10">Plano Personalizado</h3>
                         <p class="font-light text-sm text-gray-400 mb-6 leading-relaxed relative z-10">Desenvolvido sob medida para atender aos desejos e necessidades específicas da sua família com total exclusividade.</p>
                         
-                        <div class="mt-auto flex items-center text-xs uppercase tracking-widest font-medium text-royal-light group-hover:text-gold transition-colors duration-300 relative z-10 cursor-pointer" onclick="abrirWhatsAppEmergencia(event)">
+                        <div class="mt-auto flex items-center text-xs uppercase tracking-widest font-medium text-royal-light group-hover:text-gold transition-colors duration-300 relative z-10 cursor-pointer" onclick="abrirWhatsApp('Olá! Gostaria de falar com um consultor sobre o Plano Personalizado e entender como funciona.')">
                             Falar com consultor <i class="ph-bold ph-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-300"></i>
                         </div>
                     </div>
@@ -607,10 +607,14 @@
     </style>
 
     <script>
-        function abrirWhatsAppEmergencia() {
+        function abrirWhatsApp(mensagemPersonalizada) {
             const numero = "5577999999999"; // Substituir pelo número real depois
-            const mensagem = encodeURIComponent("Preciso de atendimento imediato da equipe de plantão da Funerária Paramirim.");
-            window.open('https://wa.me/' + numero + '?text=' + mensagem, '_blank');
+            
+            // Se não receber mensagem personalizada, usa a de emergência padrão
+            const textoFinal = mensagemPersonalizada || "Preciso de atendimento imediato da equipe de plantão da Funerária Paramirim.";
+            
+            const mensagemCodificada = encodeURIComponent(textoFinal);
+            window.open('https://wa.me/' + numero + '?text=' + mensagemCodificada, '_blank');
         }
 
         // Setup GSAP
