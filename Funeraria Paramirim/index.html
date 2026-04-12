@@ -724,6 +724,31 @@
         }
         requestAnimationFrame(raf);
 
+        // --- SCROLL SUAVE PARA LINKS ÂNCORA (DESKTOP E MOBILE) ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Pega o ID do alvo (ex: "#servicos")
+                const targetId = this.getAttribute('href');
+                
+                // Ignora se for apenas "#" sem destino
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Previne o pulo seco padrão do HTML
+                    e.preventDefault();
+                    
+                    // Faz o Lenis deslizar até o elemento com a mesma curva de aceleração elegante
+                    lenis.scrollTo(targetElement, {
+                        duration: 1.5,
+                        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                        offset: -50 // Dá um respiro de 50px no topo para não colar na borda
+                    });
+                }
+            });
+        });
+
         // Split text utility
         function splitTextToWords(element) {
             const text = element.innerText;
