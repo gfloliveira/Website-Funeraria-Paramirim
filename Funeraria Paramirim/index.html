@@ -425,6 +425,26 @@
         </div>
     </div>
 
+    <!-- SERVICE MODAL -->
+    <div id="service-modal" class="fixed inset-0 bg-[#050A15]/95 backdrop-blur-md z-[200] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 p-6">
+        <div class="absolute inset-0 cursor-pointer" onclick="closeServiceModal()"></div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl w-full max-w-2xl relative z-10 transform scale-95 opacity-0 transition-all duration-500 flex flex-col overflow-hidden" id="modal-content-box">
+            <div class="absolute top-6 right-6 text-gray-400 hover:text-gold cursor-pointer transition-colors z-20" onclick="closeServiceModal()">
+                <i class="ph ph-x text-2xl"></i>
+            </div>
+            <div class="p-8 md:p-10 border-b border-white/5">
+                <i id="modal-icon" class="ph-light ph-church text-4xl text-gold mb-4"></i>
+                <h3 id="modal-title" class="font-display text-3xl text-offwhite"></h3>
+            </div>
+            <div class="p-8 md:p-10">
+                <ul id="modal-list" class="space-y-4 text-gray-300 font-light text-sm md:text-base mb-8 list-none pl-0"></ul>
+                <button class="w-full glow-button glow-red flex items-center justify-center gap-2" onclick="abrirWhatsApp('Olá! Desejo mais informações sobre os serviços de excelência da Funerária Paramirim.')">
+                    <i class="ph-bold ph-whatsapp-logo text-xl"></i> Falar com um Consultor
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- WRAPPER -->
     <div class="wrapper">
         
@@ -503,7 +523,7 @@
                 <h3 class="font-display text-3xl md:text-4xl mb-12 border-b border-white/10 pb-6">Nossos Serviços</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Card 1 -->
-                    <div class="card-inner p-8 rounded-2xl relative group cursor-pointer stack-item h-full flex flex-col">
+                    <div class="card-inner p-8 rounded-2xl relative group cursor-pointer stack-item h-full flex flex-col" onclick="openServiceModal('cerimonial')">
                         <div class="absolute -top-12 -right-12 w-32 h-32 bg-royal/30 rounded-full blur-2xl group-hover:bg-gold/20 transition-colors duration-500 pointer-events-none"></div>
                         
                         <i class="ph-light ph-church text-4xl text-gold mb-6 relative z-10"></i>
@@ -516,7 +536,7 @@
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="card-inner p-8 rounded-2xl relative group cursor-pointer stack-item h-full flex flex-col">
+                    <div class="card-inner p-8 rounded-2xl relative group cursor-pointer stack-item h-full flex flex-col" onclick="openServiceModal('acolhimento')">
                         <div class="absolute -top-12 -right-12 w-32 h-32 bg-royal/30 rounded-full blur-2xl group-hover:bg-gold/20 transition-colors duration-500 pointer-events-none"></div>
                         
                         <i class="ph-light ph-house-line text-4xl text-gold mb-6 relative z-10"></i>
@@ -529,7 +549,7 @@
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="card-inner p-8 rounded-2xl relative group cursor-pointer stack-item h-full flex flex-col">
+                    <div class="card-inner p-8 rounded-2xl relative group cursor-pointer stack-item h-full flex flex-col" onclick="openServiceModal('translado')">
                         <div class="absolute -top-12 -right-12 w-32 h-32 bg-royal/30 rounded-full blur-2xl group-hover:bg-gold/20 transition-colors duration-500 pointer-events-none"></div>
                         
                         <i class="ph-light ph-car-profile text-4xl text-gold mb-6 relative z-10"></i>
@@ -697,12 +717,11 @@
             
             <div class="relative z-10 flex flex-col items-center">
                 <img src="assets/img/logo-paramirim.png" alt="Funerária Paramirim" class="h-16 md:h-20 w-auto mb-8 drop-shadow-[0_0_15px_rgba(212,175,55,0.15)] opacity-80 hover:opacity-100 transition-opacity duration-500" loading="lazy" />
-                <div class="text-[0.65rem] md:text-xs uppercase tracking-widest text-gray-500 font-medium font-body mb-2 leading-relaxed">
-                    © 2026 Funerária Paramirim. Todos os direitos reservados. <br class="md:hidden"> 
-                    <span class="hidden md:inline">|</span> CNPJ: 00.068.251/0001-08
+                <div class="text-[0.65rem] md:text-xs uppercase tracking-widest text-gray-500 font-medium font-body mb-2">
+                    Funerária Paramirim · 2025
                 </div>
-                <div class="text-xs text-gold uppercase tracking-[0.2em] mt-4 font-light">
-                    Acolhimento com excelência há mais de 40 anos.
+                <div class="text-[10px] text-gray-600">
+                    Acolhimento com excelência.
                 </div>
             </div>
         </footer>
@@ -906,6 +925,63 @@
             mobileLinks.forEach(link => {
                 link.addEventListener('click', closeMenu);
             });
+        }
+
+        const serviceData = {
+            cerimonial: {
+                title: "Cerimonial de Honra",
+                icon: "ph-church",
+                items: [
+                    "Preparação completa e cuidadosa, garantindo uma apresentação digna e serena.",
+                    "Ornamentação floral de alto padrão, personalizável conforme o desejo da família.",
+                    "Suporte cerimonial contínuo do início ao fim do velório.",
+                    "Ambiente preparado para homenagens e despedidas memoráveis."
+                ]
+            },
+            acolhimento: {
+                title: "Acolhimento Familiar",
+                icon: "ph-house-line",
+                items: [
+                    "Salas de velório climatizadas, projetadas para oferecer o máximo de conforto.",
+                    "Serviço de copa premium, incluindo cafés, chás e estrutura para a família.",
+                    "Suíte de repouso privativa para descanso dos familiares mais próximos.",
+                    "Ambientes sonorizados e com iluminação projetada para transmitir paz."
+                ]
+            },
+            translado: {
+                title: "Translado Premium",
+                icon: "ph-car-profile",
+                items: [
+                    "Frota de veículos executivos, modernos e rigorosamente revisados.",
+                    "Cobertura para translados municipais, intermunicipais e interestaduais.",
+                    "Motoristas profissionais, treinados para condução de cortejos com solenidade.",
+                    "Toda a logística e documentação de transporte gerenciada por nossa equipe."
+                ]
+            }
+        };
+
+        function openServiceModal(key) {
+            const data = serviceData[key];
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-icon').className = `ph-light ${data.icon} text-4xl text-gold mb-4`;
+            const list = document.getElementById('modal-list');
+            list.innerHTML = data.items.map(i => `<li class="flex items-start gap-3"><span class="text-gold mt-1"><i class="ph-fill ph-check-circle"></i></span>${i}</li>`).join('');
+            
+            const modal = document.getElementById('service-modal');
+            const box = document.getElementById('modal-content-box');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => box.classList.remove('scale-95', 'opacity-0'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeServiceModal() {
+            const modal = document.getElementById('service-modal');
+            const box = document.getElementById('modal-content-box');
+            box.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = '';
+            }, 300);
         }
     </script>
 </body>

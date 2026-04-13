@@ -1,0 +1,24 @@
+Checklist de Finalização - Funerária Paramirim
+1. Ajuste de Experiência (UI/UX)
+
+[ ] Definir a interação dos botões "Detalhes do serviço" nos 3 cards principais (escolher entre o Modal de Vidro, Expansão Sanfona ou link direto para o WhatsApp) e aplicar o código.
+
+2. Substituição de Variáveis Reais (Obrigatório)
+
+[ ] WhatsApp: Ir até a linha do JavaScript (const numero = "5577999999999";) e trocar para o número oficial do plantão.
+
+[ ] Formulário: Criar uma conta gratuita no Formspree (ou Getform), pegar a chave e substituir no HTML (action="https://formspree.io/f/SUA_CHAVE_AQUI").
+
+[ ] Google Maps: Substituir os links genéricos (http://googleusercontent.../0) pelos links reais de compartilhamento de rota da Loja Matriz e do Salão de Velórios.
+
+3. Mídias e SEO
+
+[ ] Gerar a imagem de compartilhamento usando o prompt que fizemos, salvar como capa-compartilhamento.png e colocar dentro da pasta assets/img/.
+
+4. Publicação (Hospedagem)
+
+[ ] Escolher onde o site vai morar (ex: Hostinger, Vercel, Netlify).
+
+[ ] Fazer o upload da pasta principal do projeto.
+
+[ ] Apontar o domínio oficial (funerariaparamirim.com.br ou similar) para a hospedagem.

@@ -1,396 +1,686 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Design System - AETHEREAL</title>
+    <title>Design System - Funerária Paramirim</title>
+    
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- GSAP / Lenis -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'royal': '#0F3073',
+                        'royal-light': '#2453B3',
+                        'crimson': '#A31621',
+                        'crimson-light': '#D62231',
+                        'offwhite': '#F8F9FA',
+                        'dark-navy': '#050A15',
+                        'gold': '#D4AF37'
+                    },
+                    fontFamily: {
+                        display: ['"Playfair Display"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
         /* --- CORE --- */
         :root {
-        --c-bg: #E3E1DC; /* Stone/Concrete */
-        --c-dark: #121212;
-        --c-accent: #374336; /* Deep Moss */
-        --font-display: 'Syncopate', sans-serif;
-        --font-body: 'Manrope', sans-serif;
+            --c-bg: #F8F9FA;
+            --c-dark: #050A15;
+            --c-primary: #0F3073; 
+            --c-accent: #A31621;  
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
         }
+
         body {
-        background-color: var(--c-bg);
-        color: var(--c-dark);
-        font-family: var(--font-body);
-        margin: 0;
-        overflow-x: hidden;
-        cursor: auto;
-        opacity: 0; /* JS fade in */
+            background-color: var(--c-dark);
+            color: #ffffff;
+            font-family: var(--font-body);
+            margin: 0;
+            overflow-x: hidden;
+            opacity: 0; 
         }
+
         /* --- LAYOUT UTILS --- */
         .wrapper {
-        position: relative;
-        z-index: 10;
-        background-color: var(--c-bg);
-        margin-bottom: 0; /* Changed from 100vh for DS page */
-        box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 10;
+            background-color: var(--c-dark);
         }
+
         /* --- TEXT REVEAL UTILS --- */
         .word-wrap {
-        display: inline-block;
-        overflow: hidden;
-        vertical-align: top;
-        padding-bottom: 0.1em;
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: top;
+            padding-bottom: 0.1em;
         }
         .word-inner {
-        display: inline-block;
-        transform: translateY(110%);
+            display: inline-block;
+            transform: translateY(110%);
         }
+
         /* --- PRELOADER --- */
         .loader {
-        position: fixed;
-        inset: 0;
-        background: #000;
-        z-index: 10000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
+            position: fixed;
+            inset: 0;
+            background: var(--c-dark);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            flex-direction: column;
         }
         .loader-text {
-        font-family: var(--font-display);
-        font-size: 5vw;
-        font-weight: 700;
+            font-family: var(--font-display);
+            font-size: 3vw;
+            font-style: italic;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            color: var(--c-bg);
+        }
+        .loader-bar-wrap {
+            width: 200px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
         }
         .loader-bar {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 4px;
-        background: #fff;
-        width: 0%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: #D4AF37;
+            width: 0%;
         }
-        /* --- CARD STACK SECTION --- */
-        .stack-section {
-        padding: 10vh 0;
-        background: var(--c-dark);
-        color: #E3E1DC;
-        position: relative;
+
+        /* --- EFFECTS & ANIMATIONS --- */
+        .glow-button {
+            position: relative;
+            padding: 1rem 2rem;
+            border-radius: 999px;
+            background: var(--c-primary);
+            color: white;
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            z-index: 1;
         }
-        .stack-container {
-        width: 100%;
-        max-width: 1400px;
-        margin: 0 auto;
-        position: relative;
-        padding-bottom: 10vh;
+
+        .glow-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--c-primary), #2453B3, var(--c-primary));
+            z-index: -1;
+            transition: opacity 0.4s ease;
+            opacity: 0;
         }
-        .card-item {
-        position: relative; /* Changed from sticky for DS display */
-        height: 60vh; /* Reduced height for DS */
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 5vh;
+
+        .glow-button:hover {
+            box-shadow: 0 0 20px rgba(36, 83, 179, 0.6);
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.6);
         }
+
+        .glow-button:hover::before {
+            opacity: 1;
+        }
+
+        .glow-red {
+            background: var(--c-accent);
+            animation: emergencyPulse 2.5s infinite;
+        }
+        .glow-red::before {
+            background: linear-gradient(45deg, var(--c-accent), #D62231, var(--c-accent));
+        }
+        .glow-red:hover {
+            animation: none;
+            box-shadow: 0 0 25px rgba(214, 34, 49, 0.8), inset 0 0 10px rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
         .card-inner {
-        width: 90%;
-        height: 100%;
-        background: #1a1a1a;
-        border: 1px solid rgba(255,255,255,0.1);
-        position: relative;
-        overflow: hidden;
-        display: grid;
-        grid-template-columns: 1fr 1.2fr;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            position: relative;
         }
-        .card-content {
-        padding: 4rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background: #1a1a1a;
-        z-index: 2;
+        
+        .card-inner::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.06), transparent);
+            transform: skewX(-25deg);
+            transition: left 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
         }
-        .card-img-wrap {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
+
+        .card-inner:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 20px rgba(212, 175, 55, 0.05);
+            transform: translateY(-5px);
         }
-        .card-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 1.5s ease;
+
+        .card-inner:hover::after {
+            left: 200%;
         }
-        .card-inner:hover .card-img {
-        transform: scale(1.1);
+
+        /* Ghost Button Elegant Fill */
+        .btn-ghost {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
-        /* Mobile adjustment */
-        @media (max-width: 768px) {
-        .card-inner { grid-template-columns: 1fr; }
-        .card-item { height: 85vh; }
-        .card-img-wrap { height: 50%; order: -1; }
-        .card-content { padding: 2rem; }
+        .btn-ghost::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(212, 175, 55, 0.1);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
         }
-        /* --- TYPOGRAPHY --- */
-        .display { font-family: var(--font-display); }
-        /* --- NOISE --- */
+        .btn-ghost:hover::before {
+            transform: scaleY(1);
+        }
+
         .noise-overlay {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 9000;
-        opacity: 0.05;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
         }
+
+        .glass-nav {
+            background: rgba(5, 10, 21, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Floating elements animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(15, 48, 115, 0.4) 0%, rgba(5, 10, 21, 1) 70%);
+        }
+        
+        .section-gradient {
+            background: linear-gradient(to bottom, #050A15, #0a1120);
+        }
+
+        .input-elegant {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .input-elegant:focus {
+            outline: none;
+            border-color: var(--c-primary);
+            box-shadow: 0 0 15px rgba(15, 48, 115, 0.5);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Ambient Keyframes */
+        @keyframes emergencyPulse {
+            0% { box-shadow: 0 0 0 0 rgba(163, 22, 33, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(163, 22, 33, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(163, 22, 33, 0); }
+        }
+
+        @keyframes etherealGlow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(212,175,55,0.2)) scale(1); }
+            50% { filter: drop-shadow(0 0 25px rgba(212,175,55,0.6)) scale(1.04); }
+        }
+        .anim-ethereal {
+            animation: etherealGlow 4s ease-in-out infinite;
+        }
+
+    /* Solemn Reveal Animation */
+        @keyframes solemnReveal {
+            0% { opacity: 0; transform: translateY(15px); filter: blur(8px); letter-spacing: 0em; }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0px); letter-spacing: 0.15em; }
+        }
+        .anim-solemn {
+            animation: solemnReveal 4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+            opacity: 0; 
+            text-transform: uppercase;
+        }
+
     </style>
 </head>
-<body class="">
+<body class="antialiased">
     <!-- UTILS -->
     <div class="noise-overlay"></div>
+    
     <!-- PRELOADER -->
     <div class="loader">
-        <div class="loader-text">SYSTEM</div>
-        <div class="loader-bar"></div>
+        <div class="relative mb-8 flex justify-center items-center">
+            <div class="absolute inset-0 bg-gold/20 blur-2xl rounded-full scale-110"></div>
+            <img src="../logo%20sem%20fundo.png" alt="Funerária Paramirim" class="h-16 md:h-24 w-auto relative z-10 anim-ethereal" />
+        </div>
+        <div class="loader-bar-wrap bg-white/5 overflow-hidden rounded-full h-[2px]">
+            <div class="loader-bar h-full"></div>
+        </div>
     </div>
 
-    <!-- NAVIGATION (System Nav) -->
-    <nav class="fixed top-0 w-full p-8 flex justify-between items-center z-50 mix-blend-difference text-white">
-        <div class="display font-bold text-xl tracking-tighter">SYSTEM</div>
-        <div class="hidden md:flex gap-10 text-xs uppercase tracking-widest">
-            <a class="hover:text-gray-300 transition-colors" href="#typography">Typography</a>
-            <a class="hover:text-gray-300 transition-colors" href="#colors">Colors</a>
-            <a class="hover:text-gray-300 transition-colors" href="#components">Components</a>
-            <a class="hover:text-gray-300 transition-colors" href="index.html">Back to Site</a>
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full p-6 flex justify-between items-center z-50 glass-nav transition-all duration-300">
+        <a href="#" class="flex items-center gap-3 group">
+            <div class="relative">
+                <div class="absolute inset-0 bg-gold/10 blur-xl rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <img src="../logo%20sem%20fundo.png" alt="Funerária Paramirim" class="h-14 md:h-20 w-auto relative z-10 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]" />
+            </div>
+        </a>
+        <div class="hidden md:flex gap-8 text-xs uppercase tracking-[0.2em] font-medium text-gray-300 items-center">
+            <a class="hover:text-gold transition-colors relative group" href="#typography">
+                Tipografia
+                <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a class="hover:text-gold transition-colors relative group" href="#colors">
+                Cores
+            </a>
+            <a class="hover:text-gold transition-colors relative group" href="#components">
+                Componentes
+            </a>
+            <a class="hover:text-gold transition-colors relative group" href="#animations">
+                Animações
+            </a>
+            <button class="glow-button glow-red ml-4 shadow-lg shadow-crimson/20">Plantão 24h</button>
         </div>
-        <div class="md:hidden">MENU</div>
+        <div class="md:hidden text-gold text-2xl">
+            <i class="ph ph-list"></i>
+        </div>
     </nav>
 
     <!-- WRAPPER -->
-    <div class="wrapper pb-20">
+    <div class="wrapper">
         
-        <!-- 0) HERO CLONE -->
-        <section class="h-screen relative flex items-center justify-center overflow-hidden">
-            <img alt="Hero" class="absolute inset-0 w-full h-full object-cover brightness-75 hero-img" src="assets/068eb8ef6075.webp"/>
-            <div class="relative z-10 text-center text-white mix-blend-difference">
-                <h1 class="display text-[12vw] leading-none hero-text overflow-hidden">
-                    <span class="block translate-y-full">DESIGN</span>
-                </h1>
-                <h1 class="display text-[12vw] leading-none hero-text overflow-hidden">
-                    <span class="block translate-y-full">SYSTEM</span>
-                </h1>
-                <p class="mt-8 text-sm uppercase tracking-[0.5em] opacity-0 hero-fade mix-blend-difference">Aethereal Architecture</p>
+        <!-- 1) PRIMEIRA DOBRA / HERO -->
+        <section class="min-h-[100svh] pt-32 pb-20 relative flex items-center justify-center overflow-hidden hero-gradient">
+            <div class="absolute inset-0 w-full h-full bg-[#050A15] overflow-hidden">
+                <!-- Video Source -->
+                <video id="bg-video" autoplay muted loop playsinline class="absolute -top-[25%] left-0 w-full h-[150%] object-cover hero-video mix-blend-screen opacity-40" src="../Aerial_shot_over_202604092329.mp4"></video>
+                <!-- Overlay Gradient fading to the next section -->
+                <div class="absolute inset-0 bg-gradient-to-b from-[#050A15]/60 via-transparent to-[#050A15]"></div>
             </div>
-        </section>
-
-        <!-- 1) TYPOGRAPHY -->
-        <section id="typography" class="py-20 px-6 md:px-20 max-w-[1800px] mx-auto border-b border-black/10">
-            <div class="text-xs uppercase tracking-widest mb-12 opacity-50">01 / Typography</div>
             
-            <div class="space-y-12">
-                <!-- Heading 1 (Display) -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-baseline pb-12 border-b border-black/5">
-                    <div class="md:col-span-3 text-xs uppercase tracking-widest opacity-50">Display H1</div>
-                    <div class="md:col-span-7">
-                        <h1 class="display text-[5vw] leading-none">CONCRETE</h1>
-                    </div>
-                    <div class="md:col-span-2 text-right text-xs opacity-50">Syncopate / 12vw</div>
+            <!-- Abstract decorative element -->
+            <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-royal/20 rounded-full blur-[100px] animate-float mix-blend-screen"></div>
+            <div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-crimson/10 rounded-full blur-[80px] animate-float" style="animation-delay: 2s;"></div>
+
+            <div class="relative z-10 text-center max-w-5xl px-6 flex flex-col items-center">
+                
+                <!-- NOME SOLENE -->
+                <div class="anim-solemn font-display text-lg md:text-xl text-offwhite mb-4">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-gold via-white to-gold text-shadow-lg font-semibold">Funerária Paramirim</span>
                 </div>
 
-                <!-- Heading 2 -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-baseline pb-12 border-b border-black/5">
-                    <div class="md:col-span-3 text-xs uppercase tracking-widest opacity-50">Heading 2</div>
-                    <div class="md:col-span-7">
-                        <h2 class="display text-5xl md:text-7xl">RECENT PROJECTS</h2>
-                    </div>
-                    <div class="md:col-span-2 text-right text-xs opacity-50">Syncopate / 7xl</div>
-                </div>
-
-                <!-- Heading 3 -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-baseline pb-12 border-b border-black/5">
-                    <div class="md:col-span-3 text-xs uppercase tracking-widest opacity-50">Heading 3</div>
-                    <div class="md:col-span-7">
-                        <h3 class="text-3xl font-bold font-body">THE VOID HOUSE</h3>
-                    </div>
-                    <div class="md:col-span-2 text-right text-xs opacity-50">Manrope / 3xl / Bold</div>
-                </div>
-
-                <!-- Body Large -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-baseline pb-12 border-b border-black/5">
-                    <div class="md:col-span-3 text-xs uppercase tracking-widest opacity-50">Body Large</div>
-                    <div class="md:col-span-7">
-                        <p class="text-xl font-light leading-relaxed text-gray-700">
-                            We believe that architecture is frozen music. Our studio specializes in brutalist forms softened by biophilic integration.
-                        </p>
-                    </div>
-                    <div class="md:col-span-2 text-right text-xs opacity-50">Manrope / xl / Light</div>
-                </div>
-
-                <!-- Body Standard -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-baseline">
-                    <div class="md:col-span-3 text-xs uppercase tracking-widest opacity-50">Body Standard</div>
-                    <div class="md:col-span-7">
-                        <p class="text-gray-600 font-light leading-relaxed">
-                            Our philosophy is rooted in the belief that buildings should age, not deteriorate. We use materials that develop a patina.
-                        </p>
-                    </div>
-                    <div class="md:col-span-2 text-right text-xs opacity-50">Manrope / Base / Light</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2) COLORS & SURFACES -->
-        <section id="colors" class="py-20 px-6 md:px-20 max-w-[1800px] mx-auto border-b border-black/10">
-            <div class="text-xs uppercase tracking-widest mb-12 opacity-50">02 / Colors & Surfaces</div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <!-- Background -->
-                <div class="aspect-square bg-[#E3E1DC] border border-black/10 p-6 flex flex-col justify-between">
-                    <span class="font-bold">Stone</span>
-                    <span class="text-xs uppercase opacity-50">#E3E1DC (Bg)</span>
-                </div>
-                <!-- Dark -->
-                <div class="aspect-square bg-[#121212] text-white p-6 flex flex-col justify-between">
-                    <span class="font-bold">Dark Matter</span>
-                    <span class="text-xs uppercase opacity-50">#121212</span>
-                </div>
-                <!-- Accent -->
-                <div class="aspect-square bg-[#374336] text-white p-6 flex flex-col justify-between">
-                    <span class="font-bold">Deep Moss</span>
-                    <span class="text-xs uppercase opacity-50">#374336</span>
-                </div>
-                <!-- Card Surface -->
-                <div class="aspect-square bg-[#1a1a1a] text-white p-6 flex flex-col justify-between border border-white/10">
-                    <span class="font-bold">Card Surface</span>
-                    <span class="text-xs uppercase opacity-50">#1a1a1a</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3) UI COMPONENTS -->
-        <section id="components" class="py-20 px-6 md:px-20 max-w-[1800px] mx-auto border-b border-black/10">
-            <div class="text-xs uppercase tracking-widest mb-12 opacity-50">03 / UI Components</div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
-                <!-- Links & Buttons -->
-                <div>
-                    <h3 class="display text-2xl mb-8">Navigation & Actions</h3>
-                    
-                    <div class="space-y-8">
-                        <div>
-                            <div class="text-xs uppercase tracking-widest mb-2 opacity-50">Nav Link</div>
-                            <div class="bg-[#121212] p-6 inline-block">
-                                <a class="text-xs uppercase tracking-widest text-white hover:text-gray-300 transition-colors" href="#">Work</a>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="text-xs uppercase tracking-widest mb-2 opacity-50">Text Link</div>
-                            <div class="bg-[#1a1a1a] p-6 inline-block text-white">
-                                <button class="text-left uppercase tracking-widest text-xs border-b border-white/30 pb-2 w-max hover:text-white transition-colors text-gray-400">View Project</button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="text-xs uppercase tracking-widest mb-2 opacity-50">Big Link</div>
-                            <a class="display text-4xl leading-none hover:text-gray-400 transition-colors text-black" href="#">
-                                LET'S TALK
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cards -->
-                <div>
-                    <h3 class="display text-2xl mb-8">Project Card</h3>
-                    
-                    <!-- Card Instance -->
-                    <div class="w-full h-[400px]">
-                        <div class="card-inner">
-                            <div class="card-content">
-                                <div>
-                                    <div class="text-5xl display mb-2 text-[var(--c-bg)] opacity-30">01</div>
-                                    <h3 class="text-3xl font-bold text-white">VOID HOUSE</h3>
-                                    <p class="text-sm mt-4 opacity-70 uppercase tracking-widest text-white">Kyoto, Japan</p>
-                                </div>
-                                <div class="text-gray-400 font-light text-sm">
-                                    A minimal concrete residence focused on negative space.
-                                </div>
-                                <button class="text-left uppercase tracking-widest text-xs border-b border-white/30 pb-2 w-max hover:text-white transition-colors text-white">View Project</button>
-                            </div>
-                            <div class="card-img-wrap">
-                                <img alt="Project 1" class="card-img object-cover w-full h-full" src="assets/98984301b87c.webp"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4) LAYOUT -->
-        <section id="layout" class="py-20 px-6 md:px-20 max-w-[1800px] mx-auto border-b border-black/10">
-            <div class="text-xs uppercase tracking-widest mb-12 opacity-50">04 / Layout & Grid</div>
-            
-            <div class="grid md:grid-cols-2 gap-16">
-                <!-- Split Layout -->
-                <div class="grid md:grid-cols-2 gap-8 border border-black/10 p-8">
-                    <div class="bg-gray-300 h-32 flex items-center justify-center opacity-20">Content</div>
-                    <div class="bg-gray-300 h-32 flex items-center justify-center opacity-20">Content</div>
+                <div class="mb-4 md:mb-6 opacity-0 hero-fade flex flex-col items-center">
+                    <div class="w-12 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-4 opacity-50"></div>
+                    <p class="text-[0.6rem] md:text-[10px] uppercase tracking-[0.4em] text-gold font-light">Cuidado, Respeito e Tradição</p>
                 </div>
                 
-                <!-- Stack Layout Preview -->
-                <div class="relative h-64 border border-black/10 bg-[#121212] overflow-hidden p-8">
-                    <div class="absolute top-8 left-8 right-8 h-32 bg-[#1a1a1a] border border-white/10 z-10"></div>
-                    <div class="absolute top-12 left-8 right-8 h-32 bg-[#1a1a1a] border border-white/10 z-20 transform translate-y-4 scale-95 opacity-50"></div>
+                <div style="-webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 40%); mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 40%); padding-bottom: 0.5rem;" class="flex flex-col items-center">
+                    <h1 class="font-display text-4xl md:text-[5.5vw] leading-[1.1] md:leading-[0.85] hero-text overflow-hidden relative z-10">
+                        <span class="block translate-y-full tracking-wide text-offwhite text-shadow-lg shadow-black">Acolhimento</span>
+                    </h1>
+                    <h2 class="font-display text-3xl md:text-[3.5vw] leading-[1.1] md:leading-[0.8] hero-text overflow-hidden my-1 md:my-0 relative z-20">
+                        <span class="block translate-y-full tracking-wide text-offwhite text-shadow-lg shadow-black">no</span>
+                    </h2>
+                    <h1 class="font-display text-4xl md:text-[5.5vw] leading-[1.1] md:leading-[0.95] hero-text overflow-hidden italic relative z-10">
+                        <span class="block translate-y-full text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-300">momento de</span>
+                    </h1>
+                    <h1 class="font-display text-4xl md:text-[5.5vw] leading-[1.1] md:leading-[0.95] hero-text overflow-hidden italic">
+                        <span class="block translate-y-full text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-400">despedida</span>
+                    </h1>
+                </div>
+                
+                <p class="mt-6 md:mt-8 text-base md:text-lg font-light text-gray-300 max-w-2xl mx-auto opacity-0 hero-fade leading-relaxed">
+                    A Funerária Paramirim oferece suporte completo com empatia e dignidade. Um design system criado para transmitir paz e profissionalismo.
+                </p>
+
+                <div class="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-6 opacity-0 hero-fade">
+                    <button class="glow-button flex items-center justify-center gap-2 group">
+                        Ver Serviços
+                        <i class="ph ph-arrow-right group-hover:translate-x-1 duration-300"></i>
+                    </button>
+                    <button class="px-8 py-3 rounded-full border border-white/20 text-xs uppercase tracking-widest hover:border-gold hover:text-gold transition-colors duration-300 text-white btn-ghost">
+                        Nossa História
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-0 hero-fade">
+                <span class="text-[0.6rem] uppercase tracking-widest text-gray-400 mb-2">Descobrir</span>
+                <div class="w-[1px] h-12 bg-white/20 overflow-hidden relative">
+                    <div class="absolute top-0 left-0 w-full h-1/2 bg-gold animate-[slideDown_2s_ease-in-out_infinite]"></div>
                 </div>
             </div>
         </section>
 
-        <!-- 5) MOTION -->
-        <section id="motion" class="py-20 px-6 md:px-20 max-w-[1800px] mx-auto border-b border-black/10">
-            <div class="text-xs uppercase tracking-widest mb-12 opacity-50">05 / Motion</div>
+        <!-- SEPARADOR ELEGANTE -->
+        <div class="w-full flex justify-center py-10 section-gradient">
+            <div class="w-px h-20 bg-gradient-to-b from-transparent via-gold to-transparent opacity-50"></div>
+        </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
-                <!-- Text Reveal -->
-                <div>
-                    <h3 class="display text-xl mb-4">Text Reveal</h3>
-                    <h2 class="display text-4xl leading-tight split-animate">
-                        Structure as <br/><span class="text-[var(--c-accent)]">sculpture.</span>
-                    </h2>
-                    <p class="text-xs mt-4 opacity-50 font-mono">.split-animate .word-inner { transform: translateY(110%) -> 0% }</p>
+        <!-- 2) TIPOGRAFIA -->
+        <section id="typography" class="py-24 px-6 md:px-20 max-w-[1400px] mx-auto section-gradient relative">
+            <div class="text-xs uppercase tracking-widest mb-16 text-gold flex items-center gap-4 split-animate">
+                <span class="w-8 h-px bg-gold"></span> 01 / Sistema Tipográfico
+            </div>
+            
+            <div class="space-y-16">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-baseline pb-12 border-b border-white/10">
+                    <div class="text-xs uppercase tracking-widest text-gray-500">Headline 1</div>
+                    <div class="md:col-span-2">
+                        <h1 class="font-display text-5xl md:text-6xl text-offwhite">Respeito Absoluto</h1>
+                    </div>
+                    <div class="text-right text-xs text-gray-400 font-mono">
+                        Playfair Display<br/>Weight: 400<br/>Size: 4rem<br/>Letter Spacing: Normal
+                    </div>
                 </div>
 
-                <!-- Hover Scale -->
-                <div>
-                    <h3 class="display text-xl mb-4">Image Hover</h3>
-                    <div class="w-full h-64 overflow-hidden relative group cursor-pointer">
-                        <img src="assets/020117376942.webp" class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110" alt="Motion Demo">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-baseline pb-12 border-b border-white/10">
+                    <div class="text-xs uppercase tracking-widest text-gray-500">Headline 3</div>
+                    <div class="md:col-span-2">
+                        <h3 class="font-display text-3xl italic text-offwhite">Planos de Assistência</h3>
                     </div>
-                    <p class="text-xs mt-4 opacity-50 font-mono">transition: transform 1.5s ease; scale(1.1)</p>
+                    <div class="text-right text-xs text-gray-400 font-mono">
+                        Playfair Display<br/>Weight: 400 Italic<br/>Size: 1.875rem
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-baseline pb-12 border-b border-white/10">
+                    <div class="text-xs uppercase tracking-widest text-gray-500">Body Large</div>
+                    <div class="md:col-span-2">
+                        <p class="font-body text-lg font-light leading-relaxed text-gray-300">
+                            Nossa equipe está preparada para cuidar de todos os trâmites legais, garantindo que sua família tenha espaço para viver o luto com tranquilidade.
+                        </p>
+                    </div>
+                    <div class="text-right text-xs text-gray-400 font-mono">
+                        Inter<br/>Weight: 300<br/>Size: 1.125rem<br/>Line Height: Relaxed
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-baseline pb-12 border-b border-white/10">
+                    <div class="text-xs uppercase tracking-widest text-gray-500">Labels / Links</div>
+                    <div class="md:col-span-2">
+                        <p class="font-body text-xs uppercase tracking-[0.2em] font-medium text-gold">
+                            Ver todos os planos disponíveis
+                        </p>
+                    </div>
+                    <div class="text-right text-xs text-gray-400 font-mono">
+                        Inter<br/>Weight: 500<br/>Size: 0.75rem<br/>Letter Spacing: 0.2em<br/>Uppercase
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3) CORES -->
+        <section id="colors" class="py-24 px-6 md:px-20 max-w-[1400px] mx-auto relative section-gradient">
+            <div class="text-xs uppercase tracking-widest mb-16 text-gold flex items-center gap-4 split-animate">
+                <span class="w-8 h-px bg-gold"></span> 02 / Paleta de Cores
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                <!-- Royal Blue -->
+                <div class="rounded-xl overflow-hidden border border-white/10 card-inner group">
+                    <div class="h-32 bg-royal relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent"></div>
+                    </div>
+                    <div class="p-4 bg-dark-navy">
+                        <h4 class="font-bold text-sm text-offwhite mb-1">Azul Royal</h4>
+                        <p class="text-xs text-gray-500 font-mono mb-2">#0F3073</p>
+                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: Elementos primários, botões principais, fundos de destaque. Transmite confiança e seriedade.</p>
+                    </div>
+                </div>
+
+                <!-- Vermelho -->
+                <div class="rounded-xl overflow-hidden border border-white/10 card-inner group">
+                    <div class="h-32 bg-crimson relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent"></div>
+                    </div>
+                    <div class="p-4 bg-dark-navy">
+                        <h4 class="font-bold text-sm text-offwhite mb-1">Vermelho Carmesim</h4>
+                        <p class="text-xs text-gray-500 font-mono mb-2">#A31621</p>
+                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: CTAs urgentes (Plantão 24h), badges de alerta. Usado com moderação para contraste.</p>
+                    </div>
+                </div>
+
+                <!-- Gold -->
+                <div class="rounded-xl overflow-hidden border border-white/10 card-inner group">
+                    <div class="h-32 bg-gold relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
+                    </div>
+                    <div class="p-4 bg-dark-navy">
+                        <h4 class="font-bold text-sm text-offwhite mb-1">Dourado</h4>
+                        <p class="text-xs text-gray-500 font-mono mb-2">#D4AF37</p>
+                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: Ícones, separadores, hovers. Traz um tom premium, celestial e de honra.</p>
+                    </div>
+                </div>
+
+                <!-- White/Offwhite -->
+                <div class="rounded-xl overflow-hidden border border-white/10 card-inner group">
+                    <div class="h-32 bg-offwhite relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-black/5 to-transparent"></div>
+                    </div>
+                    <div class="p-4 bg-dark-navy">
+                        <h4 class="font-bold text-sm text-offwhite mb-1">Branco Suave</h4>
+                        <p class="text-xs text-gray-500 font-mono mb-2">#F8F9FA</p>
+                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: Texto principal sobre fundos escuros. Menos agressivo que o branco puro.</p>
+                    </div>
+                </div>
+
+                <!-- Dark Navy -->
+                <div class="rounded-xl overflow-hidden border border-white/10 card-inner group">
+                    <div class="h-32 bg-dark-navy relative overflow-hidden border-b border-white/5">
+                        <div class="absolute inset-0 bg-gradient-to-b from-royal/5 to-transparent"></div>
+                    </div>
+                    <div class="p-4 bg-dark-navy">
+                        <h4 class="font-bold text-sm text-offwhite mb-1">Azul Noturno</h4>
+                        <p class="text-xs text-gray-500 font-mono mb-2">#050A15</p>
+                        <p class="text-[0.65rem] text-gray-400 leading-tight">Uso: Fundo base do site. Cria um ambiente solene, elegante e respeitoso.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4) COMPONENTES -->
+        <section id="components" class="py-24 px-6 md:px-20 max-w-[1400px] mx-auto relative section-gradient">
+            <div class="text-xs uppercase tracking-widest mb-16 text-gold flex items-center gap-4 split-animate">
+                <span class="w-8 h-px bg-gold"></span> 03 / Componentes & UI
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <!-- Botões e Inputs -->
+                <div class="space-y-12">
+                    <div>
+                        <h3 class="font-display text-2xl mb-8 border-b border-white/10 pb-4">Botões de Ação</h3>
+                        <div class="flex flex-wrap gap-6 items-center">
+                            <button class="glow-button flex items-center gap-2 group">
+                                Primário <i class="ph ph-arrow-right group-hover:translate-x-1 duration-300"></i>
+                            </button>
+                            <button class="glow-button glow-red">Carmesim (Urgente)</button>
+                            <button class="px-6 py-3 rounded-full border border-white/20 text-xs uppercase tracking-widest hover:text-gold hover:border-gold transition-colors duration-300 btn-ghost text-white">
+                                Botão Fantasma
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-display text-2xl mb-8 border-b border-white/10 pb-4">Inputs e Formulários</h3>
+                        <div class="space-y-4 max-w-md">
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Nome Completo</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg input-elegant text-sm" placeholder="Digite seu nome">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Mensagem</label>
+                                <textarea class="w-full px-4 py-3 rounded-lg input-elegant text-sm h-24 resize-none" placeholder="Como podemos ajudar?"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-display text-2xl mb-8 border-b border-white/10 pb-4">Badges e Tooltips</h3>
+                        <div class="flex gap-4">
+                            <span class="px-3 py-1 rounded-full bg-royal/20 border border-royal text-royal-light text-xs font-medium">Plano Prata</span>
+                            <span class="px-3 py-1 rounded-full bg-gold/10 border border-gold/50 text-gold text-xs font-medium">Recomendado</span>
+                            <span class="relative group cursor-pointer text-gray-400 text-sm border-b border-dashed border-gray-600 pb-1">
+                                Passe o mouse via Tooltip
+                                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max px-3 py-2 bg-white text-dark-navy text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-xl pointer-events-none">
+                                    Informação adicional elegante
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cards Exemplo -->
+                <div>
+                    <h3 class="font-display text-2xl mb-8 border-b border-white/10 pb-4">Cards Elegantes</h3>
+                    <div class="grid grid-cols-1 gap-8">
+                        <!-- Card Serviço -->
+                        <div class="card-inner p-8 rounded-2xl relative group cursor-pointer stack-item">
+                            <!-- Glow decorativo -->
+                            <div class="absolute -top-12 -right-12 w-32 h-32 bg-royal/30 rounded-full blur-2xl group-hover:bg-gold/20 transition-colors duration-500"></div>
+                            
+                            <i class="ph-light ph-church text-4xl text-gold mb-6"></i>
+                            <h3 class="font-display text-2xl mb-3 text-offwhite">Cerimonial Completo</h3>
+                            <p class="font-light text-sm text-gray-400 mb-6 leading-relaxed">Organização completa do velório e homenagens póstumas, com arranjos florais, música suave e coordenação atenta.</p>
+                            
+                            <div class="flex items-center text-xs uppercase tracking-widest font-medium text-royal-light group-hover:text-gold transition-colors duration-300">
+                                Detalhes do serviço <i class="ph-bold ph-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-300"></i>
+                            </div>
+                        </div>
+
+                        <!-- Card Imagem -->
+                        <div class="card-inner rounded-2xl relative overflow-hidden group h-[220px] stack-item transform translate-y-4">
+                            <img src="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?q=80&w=2075&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-[1.5s]" alt="Flores brancas">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark-navy to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-8 w-full">
+                                <span class="px-2 py-1 bg-crimson/80 text-white text-[10px] uppercase tracking-widest rounded mb-3 inline-block">Instruções</span>
+                                <h3 class="font-display text-xl text-offwhite">O que fazer em caso de óbito?</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5) ANIMAÇÕES -->
+        <section id="animations" class="py-24 px-6 md:px-20 max-w-[1400px] mx-auto text-center border-t border-white/5 section-gradient">
+             <div class="text-xs uppercase tracking-widest mb-8 text-gold justify-center flex items-center gap-4 split-animate">
+                <span class="w-8 h-px bg-gold"></span> 04 / Coreografia (Animações)
+            </div>
+            <h2 class="font-display text-4xl mb-6 split-animate">Movimentos Suaves e Respeitosos</h2>
+            <p class="text-gray-400 font-light max-w-2xl mx-auto mb-16 split-animate">
+                As animações deste projeto focam em revelações graduais (`Fade-in` e `Slide-up`), evitando movimentos bruscos. O uso de GSAP e Lenis garante uma navegação serena, simulando fluidez.
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="p-6 border border-white/5 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                    <i class="ph-light ph-sort-ascending text-2xl text-royal-light mb-2"></i>
+                    <h5 class="text-xs uppercase tracking-widest mb-1 text-white">Split Text</h5>
+                    <p class="text-[10px] text-gray-500">Palavras surgem de baixo</p>
+                </div>
+                <div class="p-6 border border-white/5 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                    <i class="ph-light ph-image text-2xl text-royal-light mb-2"></i>
+                    <h5 class="text-xs uppercase tracking-widest mb-1 text-white">Parallax Img</h5>
+                    <p class="text-[10px] text-gray-500">Fundo move mais devagar</p>
+                </div>
+                <div class="p-6 border border-white/5 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                    <i class="ph-light ph-stack text-2xl text-royal-light mb-2"></i>
+                    <h5 class="text-xs uppercase tracking-widest mb-1 text-white">Stack Cards</h5>
+                    <p class="text-[10px] text-gray-500">Cards se sobrepõem</p>
+                </div>
+                <div class="p-6 border border-white/5 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
+                    <i class="ph-light ph-sparkle text-2xl text-royal-light mb-2"></i>
+                    <h5 class="text-xs uppercase tracking-widest mb-1 text-white">Glow Blur</h5>
+                    <p class="text-[10px] text-gray-500">Luz suave focada</p>
                 </div>
             </div>
         </section>
 
         <!-- FOOTER -->
-        <footer class="py-20 text-center text-xs uppercase tracking-widest opacity-30">
-            AETHEREAL DESIGN SYSTEM
+        <footer class="py-16 md:py-20 border-t border-white/5 bg-[#02050A] text-center relative overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-royal/10 rounded-full blur-[100px] pointer-events-none"></div>
+            
+            <div class="relative z-10 flex flex-col items-center">
+                <img src="../logo%20sem%20fundo.png" alt="Funerária Paramirim" class="h-16 md:h-20 w-auto mb-8 drop-shadow-[0_0_15px_rgba(212,175,55,0.15)] opacity-80 hover:opacity-100 transition-opacity duration-500" />
+                <div class="text-[0.65rem] md:text-xs uppercase tracking-widest text-gray-500 font-medium font-body mb-2">
+                    Design System · Funerária Paramirim · 2025
+                </div>
+                <div class="text-[10px] text-gray-600">
+                    Acolhimento com excelência.
+                </div>
+            </div>
         </footer>
 
     </div>
 
+    <!-- ANIMAÇÕES SCRIPTS -->
+    <style>
+        @keyframes slideDown {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(200%); }
+        }
+    </style>
+
     <script>
-        // --- SETUP ---
+        // Setup GSAP
         gsap.registerPlugin(ScrollTrigger);
 
-        // --- LENIS SCROLL ---
+        // Setup Lenis (Smooth Scroll)
         const lenis = new Lenis({
-            duration: 1.2,
+            duration: 1.5, // slightly slower for more elegance
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             direction: 'vertical',
             smooth: true,
@@ -401,7 +691,7 @@
         }
         requestAnimationFrame(raf);
 
-        // --- TEXT SPLITTER UTILITY ---
+        // Split text utility
         function splitTextToWords(element) {
             const text = element.innerText;
             const words = text.split(' ');
@@ -414,12 +704,11 @@
             });
         }
 
-        // Apply split to all elements with class .split-animate
         document.querySelectorAll('.split-animate').forEach(el => {
             splitTextToWords(el);
         });
 
-        // --- LOADER ---
+        // Preloader Animation
         const loadTl = gsap.timeline({
             onComplete: () => {
                 document.body.style.opacity = 1;
@@ -427,44 +716,79 @@
             }
         });
 
-        loadTl.to('.loader-bar', { width: '100%', duration: 1.5, ease: 'power2.inOut' })
-              .to('.loader-text', { y: -50, opacity: 0, duration: 0.5 })
-              .to('.loader', { yPercent: -100, duration: 1, ease: 'power4.inOut' });
+        loadTl.to('.loader-bar', { width: '100%', duration: 1.8, ease: 'power2.inOut' })
+              .to('.loader-text', { y: -20, opacity: 0, duration: 0.6 }, "-=0.2")
+              .to('.loader-bar-wrap', { opacity: 0, duration: 0.4 }, "<")
+              .to('.loader', { yPercent: -100, duration: 1.2, ease: 'power4.inOut' });
 
         function initSite() {
-            // Hero Animations
-            gsap.to('.hero-text span', { 
+            // Hero
+            gsap.fromTo('.hero-text span', 
+                { y: '100%', opacity: 0 },
+                { 
                 y: 0, 
-                stagger: 0.1, 
+                opacity: 1,
+                stagger: 0.15, 
                 duration: 1.5, 
-                ease: 'power4.out' 
+                ease: 'power4.out',
+                delay: 0.2
             });
-            gsap.to('.hero-fade', { opacity: 1, duration: 1, delay: 0.5 });
+            gsap.to('.hero-fade', { opacity: 1, y: 0, duration: 1.5, stagger: 0.2, delay: 0.8, ease: 'power2.out', startAt: {y: 20} });
             
-            // Hero Parallax
-            gsap.to('.hero-img', {
+            // Hero Video Parallax and Fade on Scroll
+            gsap.to('.hero-video', {
                 yPercent: 30,
+                opacity: 0.1,
                 ease: 'none',
                 scrollTrigger: {
-                    trigger: '.hero-img',
+                    trigger: '.hero-gradient',
                     start: 'top top',
                     end: 'bottom top',
                     scrub: true
                 }
             });
 
-            // --- TEXT REVEAL ON SCROLL ---
+            // Text Revel on Scroll
             const splitElements = document.querySelectorAll('.split-animate');
             splitElements.forEach(el => {
                 const words = el.querySelectorAll('.word-inner');
                 gsap.to(words, {
                     y: "0%",
-                    duration: 1,
+                    duration: 1.2,
                     ease: "power3.out",
-                    stagger: 0.02,
+                    stagger: 0.03,
                     scrollTrigger: {
                         trigger: el,
-                        start: "top 85%", 
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+            });
+
+            // Navbar Blur effect on scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('.glass-nav');
+                if (window.scrollY > 50) {
+                    nav.style.background = 'rgba(5, 10, 21, 0.9)';
+                    nav.style.paddingTop = '1rem';
+                    nav.style.paddingBottom = '1rem';
+                } else {
+                    nav.style.background = 'rgba(5, 10, 21, 0.7)';
+                    nav.style.paddingTop = '1.5rem';
+                    nav.style.paddingBottom = '1.5rem';
+                }
+            });
+
+            // Stack Item Animation
+            gsap.utils.toArray('.stack-item').forEach((item, i) => {
+                gsap.from(item, {
+                    y: 50,
+                    opacity: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top 85%",
                         toggleActions: "play none none reverse"
                     }
                 });
