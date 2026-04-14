@@ -1,4 +1,4 @@
-# Funerária Paramirim - Landing Page de Alto Padrão
+#  Funerária Paramirim - Landing Page de Alto Padrão
 
 Bem-vindo ao repositório oficial da Landing Page da **Funerária Paramirim**. Este projeto é focado em transmitir acolhimento, respeito e solenidade por meio de uma estética cinematográfica, design moderno no formato **Dark Mode** e interações excepcionalmente fluidas.
 
@@ -17,7 +17,7 @@ O design de interface e a experiência do usuário foram cuidadosamente arquitet
 
 ## 💻 Tech Stack
 
-A tecnologia fundamenta de forma estável o requinte visual e a performance da vitrine da empresa. Construída sob as melhores heurísticas atuais e com um código minificado livre de redundâncias:
+A tecnologia fundamenta de forma estável o requinte visual e a performance da vitrine da empresa. Foi Construída sob as melhores heurísticas atuais e com um código minificado livre de redundâncias:
 
 - **HTML5 (Semântico)**: Estrutura fiel à acessibilidade e organizada com tags fundamentais de SEO e estruturação pura.
 - **Tailwind CSS**: Estilização performática (utility-first), garantindo total responsividade, classes personalizadas e manutenibilidade visual cirúrgica.
