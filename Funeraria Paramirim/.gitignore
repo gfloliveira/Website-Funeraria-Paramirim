@@ -35,7 +35,7 @@ build/
 out/
 .cache/
 
-# Pastas Locais Ignoradas
+#Ignorar essas pastas locais
 Design Systems/
 Fonts/
 Prompts/
