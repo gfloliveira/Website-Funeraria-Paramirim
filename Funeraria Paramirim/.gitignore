@@ -34,3 +34,8 @@ dist/
 build/
 out/
 .cache/
+
+# Pastas Locais Ignoradas
+Design Systems/
+Fonts/
+Prompts/
