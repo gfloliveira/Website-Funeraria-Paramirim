@@ -65,15 +65,22 @@
     <style>
         /* --- CORE --- */
         @font-face {
-            font-family: 'Birds of Paradise';
-            src: url('assets/fonts/birds-of-paradise.ttf') format('truetype');
+            font-family: 'Erode';
+            src: url('assets/fonts/Erode-MediumItalic.otf') format('opentype');
+            font-weight: 500;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Brittany';
+            src: url('assets/fonts/BrittanySignature.ttf') format('truetype');
             font-weight: normal;
-            font-style: normal;
             font-display: swap;
         }
 
         .font-hero-custom {
-            font-family: 'Birds of Paradise', cursive;
+            font-family: 'Erode', serif;
             font-weight: normal;
             font-style: normal;
             line-height: normal;
@@ -726,6 +733,10 @@
                     <span>CNPJ: 00.068.251/0001-08</span>
                     <span class="hidden md:inline-block text-white/20">&bull;</span>
                     <span>Acolhimento com excelência há mais de 40 anos.</span>
+                </div>
+
+                <div class="mt-8 opacity-40 hover:opacity-100 transition-opacity duration-300 text-[0.65rem] text-gray-500">
+                    Code & Design by <span class="animate-pulse mx-1">•</span> <span style="font-family: 'Brittany';" class="text-base transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)]">Aura</span>
                 </div>
             </div>
         </footer>
