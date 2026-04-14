@@ -352,6 +352,33 @@
             animation: majesticShine 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
 
+        @keyframes auraWriteFlow {
+            0% {
+                clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+                filter: brightness(1) drop-shadow(0 0 0px rgba(212,175,55,0));
+            }
+            60% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                filter: brightness(1.8) drop-shadow(0 0 15px rgba(212,175,55,0.8));
+            }
+            100% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                filter: brightness(1.2) drop-shadow(0 0 8px rgba(212,175,55,0.5));
+            }
+        }
+        
+        .aura-overlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #fff;
+            clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+        }
+        
+        .group:hover .aura-overlay {
+            animation: auraWriteFlow 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
     </style>
 </head>
 <body class="antialiased">
@@ -735,9 +762,13 @@
                     <span>Acolhimento com excelência há mais de 40 anos.</span>
                 </div>
 
-                <div class="mt-8 opacity-40 hover:opacity-100 transition-opacity duration-300 text-[0.65rem] text-gray-500">
-                    Code & Design by <span class="animate-pulse mx-1">•</span> <span style="font-family: 'Brittany';" class="text-base transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.5)]">Aura</span>
-                </div>
+                <a href="https://aura.xyz.br" target="_blank" class="mt-8 opacity-40 hover:opacity-100 transition-opacity duration-300 text-[0.65rem] text-gray-500 no-underline group inline-flex items-center">
+                    Code & Design by <span class="animate-pulse mx-1">•</span> 
+                    <span class="relative inline-block text-base" style="font-family: 'Brittany';">
+                        Aura
+                        <span class="aura-overlay" aria-hidden="true" style="font-family: 'Brittany';">Aura</span>
+                    </span>
+                </a>
             </div>
         </footer>
 
