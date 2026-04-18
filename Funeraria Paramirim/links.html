@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Funerária Paramirim | Link na Bio</title>
+    
+    <link rel="icon" type="image/png" href="assets/img/logo-paramirim.png" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'royal': '#0F3073',
+                        'gold': '#D4AF37',
+                        'crimson': '#A31621',
+                        'offwhite': '#F8F9FA'
+                    },
+                    fontFamily: {
+                        display: ['"Playfair Display"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <style>
+        /* --- Estética de Elite --- */
+        @font-face {
+            font-family: 'Brittany';
+            src: url('assets/fonts/BrittanySignature.ttf') format('truetype');
+            font-weight: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --c-dark: #050A15;
+            --c-gold: #D4AF37;
+            --c-crimson: #A31621;
+        }
+
+        body { 
+            background-color: var(--c-dark); 
+            opacity: 0; 
+            overflow-x: hidden; 
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Efeito de Vidro (Glassmorphism) Estável - SEM CONFLITO COM GSAP */
+        .btn-premium {
+            background: rgba(255, 255, 255, 0.08); /* Fundo claro e estável */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Borda para demarcar o limite */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); /* Essencial para iPhones */
+            border-radius: 16px;
+            color: #ffffff;
+            
+            /* O SEGREDO: Especificar as transições. Nunca use 'all' em itens animados pelo GSAP */
+            transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+            
+            /* Força a aceleração de hardware e impede o apagão pós-animação */
+            will-change: transform, opacity;
+            transform: translateZ(0);
+        }
+        
+        .btn-premium:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(212, 175, 55, 0.6); /* Dourado da marca no hover */
+            transform: translateY(-3px) translateZ(0); /* Mantém a aceleração ativa */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Pulso de Emergência 24h */
+        .emergency-glow {
+            background: var(--c-crimson);
+            animation: pulse-red 2.5s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(163, 22, 33, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(163, 22, 33, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(163, 22, 33, 0); }
+        }
+
+        /* CSS Auxiliar para completar os visuais - Baseado na Identidade Oficial */
+        @keyframes etherealGlow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.2)) scale(1); }
+            50% { filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.6)) scale(1.04); }
+        }
+        .anim-ethereal {
+            animation: etherealGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes majesticShine {
+            0% {
+                background-position: -200% center;
+                filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.2));
+            }
+            50% { filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6)); }
+            100% {
+                background-position: 200% center;
+                filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.2));
+            }
+        }
+        .text-majestic-shine {
+            background: linear-gradient(110deg, #D4AF37 25%, #FFFDF5 45%, #FFFDF5 55%, #D4AF37 75%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: majesticShine 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes auraWriteFlow {
+            0% {
+                clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+                filter: brightness(1) drop-shadow(0 0 0px rgba(212, 175, 55, 0));
+            }
+            60% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                filter: brightness(1.8) drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
+            }
+            100% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                filter: brightness(1.2) drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+            }
+        }
+        .aura-overlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #fff;
+            clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+        }
+        .group:hover .aura-overlay {
+            animation: auraWriteFlow 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <main class="max-w-md mx-auto px-6 pt-16 pb-12 flex flex-col items-center min-h-screen">
+        <div class="reveal-item flex flex-col items-center text-center mb-10 w-full">
+            <div class="relative mb-4 flex justify-center w-full">
+                <div class="absolute inset-0 bg-gold/10 blur-3xl rounded-full scale-150"></div>
+                <img src="assets/img/logo-paramirim.png" class="h-24 w-auto relative z-10 anim-ethereal mx-auto block">
+            </div>
+            <h1 class="font-display text-2xl text-white tracking-wider text-majestic-shine mt-2">Funerária Paramirim</h1>
+            <p class="text-[10px] uppercase tracking-[0.4em] text-gold mt-2 opacity-80">Cuidado, Respeito e Tradição</p>
+        </div>
+
+        <div class="w-full space-y-4">
+            <a href="https://wa.me/5577999614438" class="reveal-item btn-premium emergency-glow flex items-center justify-between p-5">
+                <div class="flex items-center gap-4">
+                    <i class="ph-bold ph-whatsapp-logo text-2xl text-white"></i>
+                    <span class="text-xs uppercase tracking-widest font-semibold text-white">Plantão 24h Imediato</span>
+                </div>
+                <i class="ph-bold ph-caret-right text-white opacity-80"></i>
+            </a>
+
+            <a href="index.html#planos" class="reveal-item btn-premium flex items-center justify-between p-5">
+                <div class="flex items-center gap-4">
+                    <i class="ph-light ph-shield-check text-gold text-2xl"></i>
+                    <span class="text-xs uppercase tracking-widest font-medium text-white">Planos de Assistência</span>
+                </div>
+                <i class="ph-bold ph-caret-right text-gold opacity-50"></i>
+            </a>
+
+            <a href="index.html" class="reveal-item btn-premium flex items-center justify-between p-5">
+                <div class="flex items-center gap-4">
+                    <i class="ph-light ph-globe text-gray-300 text-2xl"></i>
+                    <span class="text-xs uppercase tracking-widest font-medium text-white">Acessar Site Oficial</span>
+                </div>
+                <i class="ph-bold ph-caret-right text-gray-400 opacity-50"></i>
+            </a>
+        </div>
+
+        <footer class="reveal-item mt-auto pt-12 text-center w-full flex justify-center">
+            <a href="https://aura.xyz.br" target="_blank" class="opacity-40 hover:opacity-100 transition-opacity duration-300 text-gray-500 no-underline group flex flex-col items-center">
+                <div class="flex items-center text-[9px] uppercase tracking-widest mb-1">
+                    Code & Design by <span class="animate-pulse text-gold mx-1">•</span>
+                </div>
+                <span class="relative inline-block text-2xl text-white" style="font-family: 'Brittany';">
+                    Aura
+                    <span class="aura-overlay" aria-hidden="true" style="font-family: 'Brittany';">Aura</span>
+                </span>
+            </a>
+        </footer>
+    </main>
+
+    <script>
+        window.onload = () => {
+            gsap.to("body", { opacity: 1, duration: 1 });
+            gsap.from(".reveal-item", {
+                y: 30,
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.15,
+                ease: "power4.out"
+            });
+        };
+    </script>
+</body>
+</html>
