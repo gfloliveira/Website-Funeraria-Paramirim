@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "website-funeraria-paramirim",
+  "compatibility_date": "2026-04-20",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "Funeraria Paramirim"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
